@@ -1,0 +1,119 @@
+---
+title: "Differentiating Homeowners Insurance Rates with Geospatial Data"
+author: "Kevin McBeth, FCAS, MAAA"
+format: revealjs
+editor: visual
+---
+
+## Presenter
+
+::: columns
+::: {.column width="40%"}
+![](images/suit.jpeg)
+:::
+
+::: {.column width="60%"}
+**Kevin McBeth**
+
+FCAS - Fellow of the Casualty Actuarial Society
+
+MAAA - Member of the American Academy of Actuaries
+
+Kansas State University Alum
+
+Vice President, Corporate Actuarial, Arch Insurance
+
+https://www.linkedin.com/in/actuarialhero/
+
+https://github.com/ActuarialHero
+
+:::
+:::
+
+## Disclaimer
+
+Opinions expressed are solely my own and do not express the views or opinions of my current or employers.
+
+## Insurance Industry
+
+### Life
+
+### Health
+
+### Property & Casualty
+
+Premium & Loss data from NAIC Annual Statements
+
+Note: Not Mutually Exclusive as all three include Accident & Health Premiums
+
+## Property & Casualty Insurance
+
+Premium by Lines of Busines
+
+## Homeowners Insurance
+
+Premium = Cost + Profit
+
+## Response Variable - By-Peril Rating
+
+-   Pure Premium (Loss costs per policy)
+-   Frequency
+-   Severity
+
+### Catastrophe vs. Non-catatrophe or Weather vs. Non-weather
+
+### Rate Order Calculation
+
+### State regulation
+
+-   Filed with states so we know what they charge
+
+### Base Rates vs. Factors
+
+Show a rating plan here
+
+## Regulatory Requirements and Approval
+
+Variable Acceptability Minnesota Home Rule Different States have Different Requirements
+
+### PDFs of workproduct
+
+## Different Companies
+
+### Travelers Insurance - Quantum Home 2.0
+
+### State Farm Insurance
+
+### Insurance Services Office (Vendor)
+
+### Explore Information Services ()
+
+### Core Logic
+
+## Geocoding Quality
+
+## ZIP Codes
+
+## State Laws
+
+-   Territory granularity
+
+-   Minnesota
+
+-   Illinois (Auto?)
+
+## State-specific Rating Plans
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Learn More!
+
+-   [Insurance Information Institute](https://www.iii.org/)
+-   [The Institutes](https://web.theinstitutes.org/)
+-   [Casualty Actuarial Society](https://www.casact.org/)
+-   [Society of Actuaries](https://www.soa.org/)
+-   [SERFF: System for Electronic Rates & Forms Filings](https://www.serff.com/)
+-   [Be An Actuarya](https://www.beanactuary.org/)
+-   [National Association of Insurance Commissioners](https://content.naic.org/)
