@@ -1,10 +1,17 @@
 ---
 title: "Differentiating Homeowners Insurance Rates with Geospatial Data"
 author: "Kevin McBeth, FCAS, MAAA"
-format: revealjs
-editor: visual
+format:
+  revealjs:
+    theme: simple
+    fontsize: 1.5em
 ---
 
+```{r Load Packages}
+library(readr)
+library(ggplot2)
+library(scales)
+```
 ## Presenter
 
 ::: columns
@@ -13,20 +20,17 @@ editor: visual
 :::
 
 ::: {.column width="60%"}
-**Kevin McBeth**
+**Kevin McBeth, FCAS, MAAA**
 
-FCAS - Fellow of the Casualty Actuarial Society
+Vice President, Corporate Actuarial
 
-MAAA - Member of the American Academy of Actuaries
+Arch Insurance
 
 Kansas State University Alum
-
-Vice President, Corporate Actuarial, Arch Insurance
 
 https://www.linkedin.com/in/actuarialhero/
 
 https://github.com/ActuarialHero
-
 :::
 :::
 
@@ -36,15 +40,82 @@ Opinions expressed are solely my own and do not express the views or opinions of
 
 ## Insurance Industry
 
-### Life
+```{r Industry Bar Chart}
+industry_dwp <- read_csv("data_in/industry.csv")
 
-### Health
+ggplot(industry_dwp, aes(x = segment, y=amount)) + 
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  scale_y_continuous(labels = unit_format(unit = "", scale = 1e-9)) +
+  labs(x = "Test", y = "Premiums, Considerations, Other Stuff ($B)") +
+  theme_light(base_size = 20) +
+  theme(
+    plot.margin=unit(c(20,20,20,20), "pt"),
+   plot.title = element_blank(),
+   axis.title.y = element_blank())
 
-### Property & Casualty
+```
 
-Premium & Loss data from NAIC Annual Statements
+Note: Not Mutually Exclusive with some double-count of Accident & Health Premiums
 
-Note: Not Mutually Exclusive as all three include Accident & Health Premiums
+## Top 10 Property & Casualty Insurance Groups
+
+
+
+::: columns
+::: {.column }
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 1 | State Farm | 78.6 |
+| 2 | Berkshire Hathaway | 56.9 |
+| 3 | Progressive | 52.3 |
+| 4 | Allstate Corp | 45.5 |
+| 5 | Liberty Mutual | 45.3 |
+| 6 | Travelers | 34.3 |
+| 7 | Chubb | 30.2 |
+| 8 | USAA | 26.9 |
+| 9 | Farmers | 26.4 |
+| 10 | Nationwide | 20.3 |
+
+:::
+
+:::{.column}
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 11 | Zurich | 17.6 |
+| 12 | AIG | 15.6 |
+| 13 | The Hartford | 14.7 |
+| 14 | American Family | 14.1 |
+| 15 | CNA | 13.2 |
+| 16 | Tokio Marine | 11.3 |
+| 17 | Fairfax Financial | 11.0 |
+| 18 | Auto-Owners | 10.8 |
+| 19 | W. R. Berkley | 9.3 |
+| 20 | Assurant | 8.8 |
+
+:::
+
+:::
+
+2022 Direct Written Premium in $B
+Source: S&P Global
+
+## U.S. Insurance Regulation
+
+How this presentation is possible...
+
+### Statutory Financial Filing Requirements
+Insurance companies have to file financial statements quarterly and annual with the National Association of Insurance Commissioners. Ths includes details about premiums, losses, and expenses. This includes non-publicly traded companies.
+
+### State Insurance Department Filings
+
+Each state requirest insurance companies to tell them how their rating manuals.
+
+Exact requirements vary from state-to-state and from line-to-line.
+
+Lines of insurance sold to consumers such as Personal Auto, Homeowners/Renters, etc. tend to require much more detail and receive much more scrutiny.
+
+States earn reputations...further comments about this will be address at the bar.
 
 ## Property & Casualty Insurance
 
