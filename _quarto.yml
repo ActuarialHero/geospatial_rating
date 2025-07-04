@@ -1,0 +1,15 @@
+title: "Geospatial Data & <br>Home Insurance Territories<br>(With R)"
+author: "Kevin McBeth, FCAS, MAAA"
+project:
+  output-dir: docs
+format:
+  revealjs:
+    theme: simple
+    fontsize: 1.5em
+    embed-resources: true
+filters: 
+  - code-fold.lua
+title-slide-attributes: 
+  data-background-image: images/tornado_yellow.png
+  data-background-opacity: "0.4"
+css: style.css

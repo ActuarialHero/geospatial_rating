@@ -1,0 +1,96 @@
+# Introduction {background-color="#A1D6F4"}
+
+## Presenter {background-color="#A1D6F4"}
+
+::: columns
+
+::: {.column width="40%"}
+![](images/britts.jpeg)
+:::
+  
+::: {.column width="60%"}
+**Kevin McBeth, FCAS, MAAA**
+  
+Vice President - Corporate Actuarial
+
+Arch Insurance
+
+Kansas State University Alum
+
+[www.actuarialhero.com](www.actuarialhero.com)
+
+[GitHub](https://github.com/ActuarialHero)
+:::
+
+:::
+  
+::: {.notes}
+Manhattan, KS to Manhattan, NYC
+
+Play a bit of music
+
+Previously worked at
+- Travelers
+- Crum and Forster, 
+- Solera/Explore Information Services, a Motor Vehicle Record Vendor, and
+- Coherent, a Series B startup
+:::
+
+## Disclaimers {background-color="#A1D6F4"}
+
+::: {.incremental}
+
+- The views and opinions expressed in this presentation are my own and do not necessarily reflect those of my current or former employers. The views are my own understanding and interpretation of publicly available filings.
+
+- I am not a licensed insurance agent, broker, or claims handler. The information I share is for general informational purposes only and should not be interpreted as insurance advice, a recommendation of coverage, or guidance on claims. For personalized assistance, please consult a licensed insurance professional or claims representative.
+
+:::
+
+::: {.notes}
+Before we begin
+
+- Just note that I'm talking on my own and not on behalf of my employer. My employer doesn't provide homeowners insurance coverage
+
+- Also, I'm an actuary, and not an expert on insurance coverage. Please refer to your particular policy for the coverage you have purchased.
+:::
+
+## Arch Insurance is hiring {background-color="#A1D6F4"}
+
+::: columns
+::: {.column width="40%"}
+![](images/arch_insurance_careers_qr_code.png)
+:::
+
+::: {.column width="60%"}
+
+Website:
+
+https://archgroup.wd1.myworkdayjobs.com/careers/
+
+Job Categories to this group:
+
+- Analytics & BI
+- Information Technology
+- Actuarial/Risk
+:::
+:::
+
+
+## Agenda {background-color="#A1D6F4"}
+
+::: {.incremental}
+
+- Property & Casualty (P&C) Industry Overview
+- U.S. Insurance Regulation
+- Modeling the Cost of Home Insurance
+- Geospatial Data in Homeowners
+  - Territories
+  - Features
+  - Combining Territories & Features
+- Example Territory Maps
+- Conclusion
+- Happy Hour
+
+:::
+
+  

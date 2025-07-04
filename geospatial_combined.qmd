@@ -1,0 +1,11 @@
+# Combining Territory Boundaries and Variables
+
+## Center Value
+
+## Overlap
+
+### Predominate
+### Average
+### Groups 
+
+## Buffering

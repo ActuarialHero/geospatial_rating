@@ -1,0 +1,249 @@
+# Property & Casualty Industry Overview {background-color="#A1D6F4"}
+
+## Top 20 Property & Casualty Insurance Groups {background-color="#A1D6F4"}
+
+::: {#tbl-panel layout-ncol=2}
+
+::: {.fragment}
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 1 | State Farm | 109.0 |
+| 2 | Progressive | 75.9 |
+| 3 | Berkshire Hathaway | 63.3 |
+| 4 | Allstate | 55.9 |
+| 5 | Liberty Mutual | 44.1 |
+| 6 | Travelers | 41.9 |
+| 7 | USAA | 36.1 |
+| 8 | Chubb | 33.3 |
+| 9 | Farmers | 28.3 |
+| 10 | Zurich | 18.6 |
+
+: Top 10 {#tbl-first}
+
+:::
+
+::: {.fragment}
+
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 11 | Nationwide | 17.7 |
+| 12 | American Family | 17.6 |
+| 13 | The Hartford | 17.4 |
+| 14 | AIG | 16.1 |
+| 15 | Auto Owners | 15.9 |
+| 16 | CNA | 14.4 |
+| 17 | Tokio Marine | 12.7 |
+| 18 | Erie | 12.0 |
+| 19 | Fairfax Financial | 11.6 |
+| 20 | WR Berkley | 11.0 |
+
+: 11-20 {#tbl-second}
+
+:::
+
+2024 Direct Written Premium in $ Billions
+:::
+
+::: {.fragment}
+2024 Property & Casualty Industry Total: $1,058 Billion
+
+Source: 2024 NAIC Market Share Report
+:::
+
+::: {.notes}
+
+There are over 3,000 insurance companies comprising 1,100 insurance groups in the United States.
+
+These are the top 20 groups. They represent a bit over 60% of the market. 
+
+:::
+
+## {data-menu-title="Oh, the Things We'll Insure" background-color="#A1D6F4"}
+
+![](images/things_well_insure.png)
+
+## Oh, the Things We'll Insure - P&C Edition - Mundane Version {background-color="#A1D6F4"}
+
+```{r Industry Bar Chart}
+industry_dwp <- 
+  read_xlsx("data_in/2024_pc_market_share.xlsx", sheet = "lines")
+
+ggplot(industry_dwp, aes(x = reorder(Line, Premium), y =  Premium)) + 
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  scale_y_continuous(labels = unit_format(unit = "", scale = 1e-6)) +
+  labs(x = "Test", y = "Direct Written Premium ($B)") +
+  theme_light(base_size = 20) +
+  theme(
+    plot.margin=unit(c(20, 20, 20, 20), "pt"),
+   plot.title = element_blank(),
+   axis.title.y = element_blank()) +
+  theme(plot.background = element_rect(fill = '#A1D6F4', colour = '#A1D6F4')) +
+  theme(panel.background = element_rect(fill = '#A1D6F4'))
+
+```
+
+## Oh, the Things We'll Insure - Fun Version {background-color="#A1D6F4"}
+
+::: {.incremental}
+
+- Cars
+- Boats (Personal & Commercial)
+- Planes
+- Rockets
+- Doctors, Lawyers, Boards of Directors
+- Employees (Workers Compensation)
+- Buildings (Houses, Restaurants, Skyscrapers, etc.)
+- Oil Wells
+- Cyber 
+- Music Festivals
+- Workplace Violence
+- Musical Instruments
+- Pets
+- Death and Disgrace
+- Body Parts
+:::
+
+::: {.notes}
+The other bucket has many interesting things:
+Workplace Violence
+Musical Instruments
+Prizes
+Pets
+Body Parts
+:::
+
+## Oh, the Things We'll Insure - P&C Edition - Fun Version {background-color="#A1D6F4"}
+
+::: {.r-stack}
+
+::: {.fragment .fade-out}
+![Car](images/car.png) 
+::: 
+
+::: {.fragment}
+![Boat](images/yacht.png) 
+:::
+
+::: {.fragment}
+![Plane](images/plane.png) 
+:::
+
+::: {.fragment}
+![Rocket](images/rocket.png) 
+:::
+
+:::
+
+::: {.notes}
+The other bucket has many interesting things:
+Workplace Violence
+Musical Instruments
+Prizes
+Pets
+Body Parts
+:::
+
+
+
+## Top 20 Homeowners Insurance Groups - Countrywide {background-color="#A1D6F4"}
+
+::: {#tbl-panel layout-ncol=2}
+
+::: {.fragment}
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 1 | State Farm | 31.5 |	
+| 2 | Allstate | 15.5 |	
+| 3 | USAA | 11.9 |	
+| 4 | Liberty Mutual | 10.6 |	
+| 5 | Farmers | 9.5 |	
+| 6 | American Family | 8.6 |	
+| 7 | Travelers | 8.2 |	
+| 8 | Chubb | 4.4 |	
+| 9 | Nationwide | 3.7 |	
+| 10 | Auto Owners | 3.4 |	
+
+: Top 10 {#tbl-first}
+
+:::
+
+::: {.fragment}
+
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 11 | Erie | 3.3 |
+| 12 | Progressive | 3.3 |
+| 13 | Citizens | 2.7 |
+| 14 | UVE | 2.0 |
+| 15 | Tokio Marine | 1.7 |
+| 16 | Auto Club | 1.6 |
+| 17 | Cincinnati Financial | 1.6 |
+| 18 | CSAA | 1.5 |
+| 19 | Mercury | 1.4 |
+| 20 | Amica | 1.2 |
+
+: 11-20 {#tbl-second}
+
+:::
+
+2024 Direct Written Premium in $ Billions
+:::
+
+::: {.fragment}
+2024 Industry Total: $172.8 Billion
+
+Source: 2024 NAIC Market Share Report
+:::
+
+::: {.notes }
+Just under 75% of the market is these 20 insurance groups
+
+:::
+
+## Top 20 Homeowners Insurance Groups - Countrywide {background-color="#A1D6F4"}
+
+::: {#tbl-panel layout-ncol=2}
+
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 1 | State Farm | 31.5 |	
+| 2 | Allstate | 15.5 |	
+| 3 | USAA | 11.9 |	
+| 4 | Liberty Mutual | 10.6 |	
+| 5 | Farmers | 9.5 |	
+| 6 | American Family | 8.6 |	
+| 7 | Travelers | 8.2 |	
+| 8 | Chubb | 4.4 |	
+| 9 | Nationwide | 3.7 |	
+| 10 | Auto Owners | 3.4 |	
+
+: Top 10 {#tbl-first}
+
+| Rank | Group | Premium |
+|:-----:|-----|-----:|
+| 11 | Erie | 3.3 |
+| 12 | Progressive | 3.3 |
+| 13 | [Citizens]{style="color:red;"} | 2.7 |
+| 14 | UVE | 2.0 |
+| 15 | Tokio Marine | 1.7 |
+| 16 | Auto Club | 1.6 |
+| 17 | Cincinnati Financial | 1.6 |
+| 18 | CSAA | 1.5 |
+| 19 | Mercury | 1.4 |
+| 20 | Amica | 1.2 |
+
+: 11-20 {#tbl-second}
+
+
+2024 Direct Written Premium in $ Billions
+:::
+
+2024 Industry Total: $172.8 Billion
+
+Source: 2024 NAIC Market Share Report
+
+::: {.notes }
+Out of curiosity, is anyone familiar with number 13 on the list?"
+:::
+

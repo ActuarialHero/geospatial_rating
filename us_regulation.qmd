@@ -1,0 +1,100 @@
+# U.S. Insurance Regulation {background-color="#A1D6F4"}
+
+::: {.notes}
+
+Nothing excites an audience of open source statistical programming language aficionados as much as a talk about U.S. Insurance Regulation...
+:::
+## Statutory Financial Filing Requirements {background-color="#A1D6F4"}
+
+::: {.incremental}
+- Insurance companies in the U.S. have to file financial statements quarterly and annual with the National Association of Insurance Commissioners (NAIC)
+
+- The statements summarize premiums, losses, and expenses
+
+- Unlike GAAP financials, which focus on companies as a going concern, these focus on the financial viability of the company
+
+- Non-public companies have to submit this too
+
+
+- This is the underlying source for the data we've seen thus far
+
+- Typically called the "Yellow Book" for P&C Insurance Companies
+
+:::
+
+::: {.notes}
+If you're looking at potential employers, it's actually possible to see how well they're doing, even for non-publicly traded ones.
+
+:::
+
+## Rate Filing Requirements {background-color="#A1D6F4"}
+
+::: {.incremental}
+- Insurance is regulated at the state level
+
+- Many states, particularly in Home and Auto insurance, require carriers to file their rating algorithm with the state
+
+- States vary in how detailed those filings are, how public the details are, and what variables are allowed in rating
+
+- Some require approval before you can use them to price insurance
+
+- Some have predictive modeling checklists that must be completed
+
+- [Wikipedia page](https://en.wikipedia.org/wiki/Insurance_regulatory_law#State-based_insurance_regulation) on state-based insurance regulation
+
+- Summary: Think of this as having 51 separate peer reviewers for any data engineering calculation or model you create
+
+:::
+
+## Rate Order Calculation {background-color="#A1D6F4"}
+
+- See Excel file
+
+- [Excel File](../references_public/allstate_roc.xlsx)
+
+::: {.notes}
+
+It's possible to see how your competitors calculate premiums 
+
+:::
+
+## Criteria for Selecting Rating Variables {background-color="#A1D6F4"}
+
+::: columns
+
+::: {.column width="50%"}
+
+- Actuarial
+  - Accuracy
+  - Homogeneity
+  - Credibility
+  - Reliability
+- Operational
+  - Defined Objectively
+  - Unambiguous
+  - Mutually Exclusive & Exhaustive
+  - Minimize Likelihood of Administrative Error
+  - Cost-effective
+  - Verifiability
+
+:::
+
+::: {.column width="50%"}
+
+- Social
+  - Privacy
+  - Causality
+  - Controllability
+  - Affordability
+- Legal
+
+:::
+:::
+
+Read more: https://www.casact.org/abstract/risk-classification-chapter-6
+
+::: {.notes}
+Territory is one rating variable in a see of many
+
+:::
+
