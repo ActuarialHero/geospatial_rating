@@ -83,35 +83,6 @@ ggplot(industry_dwp, aes(x = reorder(Line, Premium), y =  Premium)) +
 
 ```
 
-## Oh, the Things We'll Insure - Fun Version {background-color="#A1D6F4"}
-
-::: {.incremental}
-
-- Cars
-- Boats (Personal & Commercial)
-- Planes
-- Rockets
-- Doctors, Lawyers, Boards of Directors
-- Employees (Workers Compensation)
-- Buildings (Houses, Restaurants, Skyscrapers, etc.)
-- Oil Wells
-- Cyber 
-- Music Festivals
-- Workplace Violence
-- Musical Instruments
-- Pets
-- Death and Disgrace
-- Body Parts
-:::
-
-::: {.notes}
-The other bucket has many interesting things:
-Workplace Violence
-Musical Instruments
-Prizes
-Pets
-Body Parts
-:::
 
 ## Oh, the Things We'll Insure - P&C Edition - Fun Version {background-color="#A1D6F4"}
 
