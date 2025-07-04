@@ -1,0 +1,43 @@
+# Location Specific Data
+
+## Where is the property?
+
+- Geocoding
+- Building Footprint
+
+## Location-specific features
+
+- Direct assignment of values to specific properties
+- Distance to Coast
+- Distance to Water
+- Flood
+
+
+## Computer Vision Applications
+
+- Tree Overhang
+- Swimming Pools
+- Roof Condition
+- Attractive Nuissances
+- Is your house even there after a storm?
+
+## Geospatial Data Types
+
+- Raster
+- Shapefiles
+
+- Raster is faster but vector is corrector
+Vector just doesn't finish
+
+Rasterize Shapefiles to the same vector grid for easy math
+
+
+## Implementation
+
+
+## People in Cities Cartoon
+
+
+## Proj4 to Proj6
+
+Switch to venv

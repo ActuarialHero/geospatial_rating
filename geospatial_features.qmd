@@ -1,0 +1,60 @@
+# Geospatial Data in Homeowners - Features
+
+## Potentially predictive features for one or more perils
+
+- Crime
+- Precipitation - U.S. National Weather Service - PRISM
+- Sea Surface Temperature / Sea Ice Coverage - NOAA
+- North American Land Data Assimilation System (NLDAS)
+- Stream Flow (USGS)
+- Reservoir Storage (USBR)
+- Dams (ICOLD)
+- Soils Survey Geographic Database (USDA) SSURGO
+- Land Use / Land Cover (NLCD)
+
+## SSURGO
+
+https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo
+
+- Download by county from https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
+- Shapefile with an ID
+- Separate Access database with data
+
+## SSURGO - Manhattan - Available Water Storage to 50 CM
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Read muaggatt data file
+muaggatt <- read_delim(
+  "data_in/ssurgo/NY061/tabular/muaggatt.txt", delim = "|",
+  col_names = muaggatt_names,
+  col_types = muaggatt_types)
+
+# Read shapefile for New York, NY county
+ssurgo <- read_sf("data_in/ssurgo/NY061/spatial/soilmu_a_ny061.shp") %>%
+  left_join(muaggatt, c ("MUKEY" = "mukey"))
+
+# Define color palate
+aws_pal <- colorBin("Blues", ssurgo$aws050wta, 5, pretty = FALSE)
+
+# Create plot
+leaflet(ssurgo) %>%
+  addPolygons(weight = 0.5,
+              opacity = 1.0, fillOpacity = 1.0,
+              fillColor = ~aws_pal(aws050wta)) %>%
+  addLegend(
+    pal = aws_pal,
+    values = ~aws050wta,
+    position = "bottomright",
+  title = "Available Water Storage to a Depth of 50 CM")
+
+```
+
+## NLCD
+
+```{r}
+
+```

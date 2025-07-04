@@ -1,0 +1,63 @@
+```{r Load Packages}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(readxl)
+library(sf)
+library(leaflet)
+library(kableExtra)
+library(summarytools)
+library(raster)
+```
+
+```{r muaggatt setup}
+muaggatt_names <- c(
+  "musym",
+  "muname",
+  "mustatus",
+  "slopegraddcp",
+  "slopegradwta",
+  "brockdepmin",
+  "wtdepannmin",
+  "wtdepaprjunmin",
+  "flodfreqdcd",
+  "flodfreqmax",
+  "pondfreqprs",
+  "aws025wta",
+  "aws050wta",
+  "aws0100wta",
+  "aws0150wta",
+  "drclassdcd",
+  "drclasswettest",
+  "hydgrpdcd",
+  "iccdcd",
+  "iccdcdpct",
+  "niccdcd",
+  "niccdcdpct",
+  "engdwobdcd",
+  "engdwbdcd",
+  "engdwbll",
+  "engdwbml",
+  "engstafdcd",
+  "engstafll",
+  "engstafml",
+  "engsldcd",
+  "engsldcp",
+  "englrsdcd",
+  "engcmssdcd",
+  "engcmssmp",
+  "urbrecptdcd",
+  "urbrecptwta",
+  "forpehrtdcp",
+  "hydclprs",
+  "awmmfpwwta",
+  "mukey")
+
+muaggatt_types <- c("cclnnnnnccnnnnnccclnnncccccccccccccncnnc")
+
+bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
+# pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
+
+```
+

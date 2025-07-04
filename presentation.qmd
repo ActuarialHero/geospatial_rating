@@ -1,190 +1,20 @@
----
-title: "Differentiating Homeowners Insurance Rates with Geospatial Data"
-author: "Kevin McBeth, FCAS, MAAA"
-format:
-  revealjs:
-    theme: simple
-    fontsize: 1.5em
----
 
-```{r Load Packages}
-library(readr)
-library(ggplot2)
-library(scales)
-```
-## Presenter
+{{< include setup.qmd >}}
 
-::: columns
-::: {.column width="40%"}
-![](images/suit.jpeg)
-:::
+{{< include intro.qmd >}}
 
-::: {.column width="60%"}
-**Kevin McBeth, FCAS, MAAA**
+{{< include pc_overview.qmd >}}
 
-Vice President, Corporate Actuarial
+{{< include us_regulation.qmd >}}
 
-Arch Insurance
+{{< include modeling.qmd >}}
 
-Kansas State University Alum
+<!-- {{< include geospatial_territories.qmd >}} -->
 
-https://www.linkedin.com/in/actuarialhero/
+<!-- {{< include geospatial_features.qmd >}} -->
 
-https://github.com/ActuarialHero
-:::
-:::
+<!-- {{< include geospatial_combined.qmd >}} -->
 
-## Disclaimer
+<!-- {{< include location_specific.qmd >}} -->
 
-Opinions expressed are solely my own and do not express the views or opinions of my current or employers.
-
-## Insurance Industry
-
-```{r Industry Bar Chart}
-industry_dwp <- read_csv("data_in/industry.csv")
-
-ggplot(industry_dwp, aes(x = segment, y=amount)) + 
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  scale_y_continuous(labels = unit_format(unit = "", scale = 1e-9)) +
-  labs(x = "Test", y = "Premiums, Considerations, Other Stuff ($B)") +
-  theme_light(base_size = 20) +
-  theme(
-    plot.margin=unit(c(20,20,20,20), "pt"),
-   plot.title = element_blank(),
-   axis.title.y = element_blank())
-
-```
-
-Note: Not Mutually Exclusive with some double-count of Accident & Health Premiums
-
-## Top 10 Property & Casualty Insurance Groups
-
-
-
-::: columns
-::: {.column }
-| Rank | Group | Premium |
-|:-----:|-----|-----:|
-| 1 | State Farm | 78.6 |
-| 2 | Berkshire Hathaway | 56.9 |
-| 3 | Progressive | 52.3 |
-| 4 | Allstate Corp | 45.5 |
-| 5 | Liberty Mutual | 45.3 |
-| 6 | Travelers | 34.3 |
-| 7 | Chubb | 30.2 |
-| 8 | USAA | 26.9 |
-| 9 | Farmers | 26.4 |
-| 10 | Nationwide | 20.3 |
-
-:::
-
-:::{.column}
-| Rank | Group | Premium |
-|:-----:|-----|-----:|
-| 11 | Zurich | 17.6 |
-| 12 | AIG | 15.6 |
-| 13 | The Hartford | 14.7 |
-| 14 | American Family | 14.1 |
-| 15 | CNA | 13.2 |
-| 16 | Tokio Marine | 11.3 |
-| 17 | Fairfax Financial | 11.0 |
-| 18 | Auto-Owners | 10.8 |
-| 19 | W. R. Berkley | 9.3 |
-| 20 | Assurant | 8.8 |
-
-:::
-
-:::
-
-2022 Direct Written Premium in $B
-Source: S&P Global
-
-## U.S. Insurance Regulation
-
-How this presentation is possible...
-
-### Statutory Financial Filing Requirements
-Insurance companies have to file financial statements quarterly and annual with the National Association of Insurance Commissioners. Ths includes details about premiums, losses, and expenses. This includes non-publicly traded companies.
-
-### State Insurance Department Filings
-
-Each state requirest insurance companies to tell them how their rating manuals.
-
-Exact requirements vary from state-to-state and from line-to-line.
-
-Lines of insurance sold to consumers such as Personal Auto, Homeowners/Renters, etc. tend to require much more detail and receive much more scrutiny.
-
-States earn reputations...further comments about this will be address at the bar.
-
-## Property & Casualty Insurance
-
-Premium by Lines of Busines
-
-## Homeowners Insurance
-
-Premium = Cost + Profit
-
-## Response Variable - By-Peril Rating
-
--   Pure Premium (Loss costs per policy)
--   Frequency
--   Severity
-
-### Catastrophe vs. Non-catatrophe or Weather vs. Non-weather
-
-### Rate Order Calculation
-
-### State regulation
-
--   Filed with states so we know what they charge
-
-### Base Rates vs. Factors
-
-Show a rating plan here
-
-## Regulatory Requirements and Approval
-
-Variable Acceptability Minnesota Home Rule Different States have Different Requirements
-
-### PDFs of workproduct
-
-## Different Companies
-
-### Travelers Insurance - Quantum Home 2.0
-
-### State Farm Insurance
-
-### Insurance Services Office (Vendor)
-
-### Explore Information Services ()
-
-### Core Logic
-
-## Geocoding Quality
-
-## ZIP Codes
-
-## State Laws
-
--   Territory granularity
-
--   Minnesota
-
--   Illinois (Auto?)
-
-## State-specific Rating Plans
-
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
-
-## Learn More!
-
--   [Insurance Information Institute](https://www.iii.org/)
--   [The Institutes](https://web.theinstitutes.org/)
--   [Casualty Actuarial Society](https://www.casact.org/)
--   [Society of Actuaries](https://www.soa.org/)
--   [SERFF: System for Electronic Rates & Forms Filings](https://www.serff.com/)
--   [Be An Actuarya](https://www.beanactuary.org/)
--   [National Association of Insurance Commissioners](https://content.naic.org/)
+<!-- {{< include learn_more.qmd >}} -->

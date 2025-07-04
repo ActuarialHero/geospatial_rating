@@ -1,0 +1,112 @@
+# Modeling the Cost of Home Insurance {background-color="#A1D6F4"}
+
+## Pricing {background-color="#A1D6F4"}
+
+::: {.incremental}
+
+- Price = Cost + Profit
+
+- Premium = Cost + Profit
+
+- Premium = Losses + Underwriting Expenses + Profit
+
+- "Rates shall not be excessive, inadequate or unfairly discriminatory."
+
+:::
+
+::: {.notes}
+We'll start economically simple: Price = Cost + Profit
+
+Since we're in insurance, the price is usually referred to as premium
+
+We can also break the cost into two portions: losses (claims) and underwriting expenses
+
+Profit is usually a flat target percentage for a line in a given state, though some insurers may do something more complicated.
+
+Underwriting expenses are often precisely defined, such as knowing the agent receives a 12% commission, or allocated internal expenses. For example, you might have an actuarial department that costs $20M/year, so you'll allocate a percent of that to homeowners roughly based on the amount of work they do on Homeowners insurance.
+
+That leaves losses. Insurance is a product where you don't know what a given policy will cost next year, so you need to build out one (or more) predictive models to guess.
+
+The 2024 Breakdown of the components was:
+65.2% Losses
+8.1% Loss Adjustment Expense
+25.9% Expenses
+99.3% Combined Ratio
+https://www.carriermanagement.com/news/2025/05/20/275425.htm
+
+Finally, many states have a law similar to this statement, so this a "cost-plus" pricing strategy.
+
+:::
+
+## Considerations for Modeling Losses {background-color="#A1D6F4"}
+
+::: {.fragment}
+Data is expensive - some records cost millions of dollars
+:::
+
+::: {.fragment}
+
+### Pure Premium vs. Frequency x Severity
+
+::: {.incremental}
+
+1) Pure Premium - Cost of losses per policy
+2) Frequency x Severity
+    i) Frequency - Claim count on a policy
+    ii) Severity - Claim amount
+:::
+
+:::
+
+
+::: {.fragment}
+
+### All Perils vs. By-Peril Rating (One vs. Multiple Models)
+
+::: {.incremental}
+Lots of bad things can happen to your home. Over the past ~20 years, there's been an increase in splitting home insurance premiums into components based on the peril of loss
+
+- Some variables are predictive of hail damaging your roof
+- Some variables are predictive of your contents being stolen
+
+:::
+
+:::
+
+::: {.fragment}
+
+### Partitioning Data into Modeling & Holdout
+
+::: {.fragment}
+
+Storms can cause multiple claims, leading to correlations across policies in the data set.
+:::
+
+:::
+
+::: {.notes}
+By-Peril rating - 2010ish
+The most common pure premium distribution is Tweedie, which is a zero-modified Poisson distribution
+
+Poisson is probably the most common frequency distribution. Negative Binomial is sometimes also used
+Lognormal, Gamma, and Pareto are common severity distributions. Note that these are parameterized differently in actuarial literature to allow for easy scaling due to inflation.
+
+:::
+
+## Models May Vary by State {background-color="#A1D6F4"}
+
+::: {.incremental}
+- Some state regulators don't like specific variables
+- Some regulatory require revealing more information about your model
+- Regions may vary
+  - D.C. is a single territory
+  - Hawaii territories are by island
+  - Minnesota territories are, roughly speaking, by city
+- Data availability
+  - Some of the data sets aren't available in Alaska and/or Hawaii
+  - The data is available, but different for a specific state
+- Cost/benefit for some regions, like Alaska
+  - Alaska is huge and requires a ton of processing power
+  - Alaska wraps around to the Eastern Hemisphere, so extra edge cases
+
+:::

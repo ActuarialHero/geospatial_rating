@@ -50,3 +50,7 @@ rsconnect/
 
 # MacOS
 .DS_Store
+
+# References that can't be publicly distributed
+/references_private/
+/.quarto/
