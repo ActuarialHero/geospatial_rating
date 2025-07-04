@@ -117,7 +117,8 @@ Body Parts
 
 ::: {.r-stack}
 
-::: {.fragment .fade-out}
+<!-- Add .fade-out to fade out -->
+::: {.fragment}
 ![Car](images/car.png) 
 ::: 
 
