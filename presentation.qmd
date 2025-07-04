@@ -9,12 +9,12 @@
 
 {{< include modeling.qmd >}}
 
-<!-- {{< include geospatial_territories.qmd >}} -->
+{{< include geospatial_territories.qmd >}}
 
-<!-- {{< include geospatial_features.qmd >}} -->
+{{< include geospatial_features.qmd >}}
 
-<!-- {{< include geospatial_combined.qmd >}} -->
+{{< include geospatial_combined.qmd >}}
 
-<!-- {{< include location_specific.qmd >}} -->
+{{< include location_specific.qmd >}}
 
-<!-- {{< include learn_more.qmd >}} -->
+{{< include learn_more.qmd >}}
