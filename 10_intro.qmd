@@ -78,7 +78,6 @@ Job Categories to this group:
 
 ## Agenda {background-color="#A1D6F4"}
 
-::: {.incremental}
 
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
@@ -91,6 +90,5 @@ Job Categories to this group:
 - Conclusion
 - Happy Hour
 
-:::
 
   
