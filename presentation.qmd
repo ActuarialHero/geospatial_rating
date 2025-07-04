@@ -1,20 +1,20 @@
 
-{{< include setup.qmd >}}
+{{< include 05_setup.qmd >}}
 
-{{< include intro.qmd >}}
+{{< include 10_intro.qmd >}}
 
-{{< include pc_overview.qmd >}}
+{{< include 15_pc_overview.qmd >}}
 
-{{< include us_regulation.qmd >}}
+{{< include 20_us_regulation.qmd >}}
 
-{{< include modeling.qmd >}}
+{{< include 25_modeling.qmd >}}
 
-{{< include geospatial_territories.qmd >}}
+{{< include 30_geospatial_territories.qmd >}}
 
-{{< include geospatial_features.qmd >}}
+{{< include 35_geospatial_features.qmd >}}
 
-{{< include geospatial_combined.qmd >}}
+{{< include 40_geospatial_combined.qmd >}}
 
-{{< include location_specific.qmd >}}
+{{< include 45_location_specific.qmd >}}
 
-{{< include learn_more.qmd >}}
+{{< include 50_learn_more.qmd >}}
