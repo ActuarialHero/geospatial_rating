@@ -134,15 +134,46 @@ Body Parts
 ![Rocket](images/rocket.png) 
 :::
 
+::: {.fragment}
+![Doctors, Nurses, and Lawyers](images/professionals.png) 
+:::
+
+::: {.fragment}
+![Workers in factory](images/factory.png) 
+:::
+
+::: {.fragment}
+![Buildings](images/city.png) 
+:::
+
+::: {.fragment}
+![Oil Wels](images/oil_wells.png) 
+:::
+
+::: {.fragment}
+![Music Festivals](images/music_festival.png) 
+:::
+
+::: {.fragment}
+![Orchestra](images/orchestra.png) 
+:::
+
+::: {.fragment}
+![Body Parts](images/body_parts.png) 
+:::
+
+::: {.fragment}
+![Pets](images/pets.png) 
+:::
+
+::: {.fragment}
+![Half Court Shot](images/half_court.png) 
+:::
+
 :::
 
 ::: {.notes}
-The other bucket has many interesting things:
-Workplace Violence
-Musical Instruments
-Prizes
-Pets
-Body Parts
+Lots of interesting insurance types
 :::
 
 
