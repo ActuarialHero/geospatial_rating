@@ -1,43 +1,26 @@
-# Location Specific Data
+# Location Specific Data {background-color="#A1D6F4"}
 
-## Where is the property?
+## Where is the property? {background-color="#A1D6F4"}
 
 - Geocoding
+  - Single point
+  - Mailbox vs. building
+  - May not be accurate, particularly for new properties
 - Building Footprint
+  - Outline of the entire building
 
-## Location-specific features
+## Location-specific features {background-color="#A1D6F4"}
 
 - Direct assignment of values to specific properties
 - Distance to Coast
-- Distance to Water
-- Flood
+- Distance to Water (lakes, rivers, etc.)
+- Flood zone determination
 
+## Computer Vision Applications {background-color="#A1D6F4"}
 
-## Computer Vision Applications
-
-- Tree Overhang
-- Swimming Pools
-- Roof Condition
-- Attractive Nuissances
+- Tree Overhang - Trees fall on houses
+- Roof Geometry & area
+- Attractive Nuisances
+  - Swimming Pools
+  - Trampolines
 - Is your house even there after a storm?
-
-## Geospatial Data Types
-
-- Raster
-- Shapefiles
-
-- Raster is faster but vector is corrector
-Vector just doesn't finish
-
-Rasterize Shapefiles to the same vector grid for easy math
-
-
-## Implementation
-
-
-## People in Cities Cartoon
-
-
-## Proj4 to Proj6
-
-Switch to venv

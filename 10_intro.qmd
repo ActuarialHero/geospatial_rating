@@ -87,6 +87,7 @@ Job Categories to this group:
   - Features
   - Combining Territories & Features
 - Example Territory Maps
+- Location-specific Data
 - Conclusion
 - Happy Hour
 

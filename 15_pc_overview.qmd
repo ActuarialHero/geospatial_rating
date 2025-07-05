@@ -141,6 +141,10 @@ ggplot(industry_dwp, aes(x = reorder(Line, Premium), y =  Premium)) +
 ![](images/half_court.png) 
 :::
 
+::: {.fragment}
+![](images/homes.png) 
+:::
+
 :::
 
 ::: {.notes}
