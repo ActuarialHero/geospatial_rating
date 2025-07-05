@@ -135,7 +135,7 @@ Counties are broken into Census tracts
 
 :::
 
-## Census Block Groups
+## Census Block Groups {background-color="#A1D6F4"}
 
 ```{r Read Census Block Group File}
 #| echo: true
@@ -159,7 +159,7 @@ Census tracts are broken into Census block groups
 :::
 
 
-## Census Blocks
+## Census Blocks {background-color="#A1D6F4"}
 
 ```{r Read Census Block File}
 #| echo: true
@@ -196,7 +196,7 @@ Census Block Groups are groups of Census Blocks
 https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html
 :::
 
-## Decennial Census Block Disruption
+## Decennial Census Block Disruption {background-color="#A1D6F4"}
 
 ```{r 2010 vs 2020 Census Blocks}
 #| echo: true
@@ -245,7 +245,7 @@ Rasters tend to default to using disk space while shapefiles are in memory.
 Historically, overlaying two shapefiles for calculations has been monstrously expensive time-wise
 :::
 
-## Grids
+## Grids {background-color="#A1D6F4"}
 
 ```{r Read MGRS 18T Shapefile}
 #| echo: true
@@ -273,14 +273,14 @@ https://earth-info.nga.mil/index.php?dir=coordsys&action=mgrs-1km-polyline-dload
 
 :::
 
-## Newer Geometries
+## Newer Geometries {background-color="#A1D6F4"}
 
 - Spherical: s2 geometry http://s2geometry.io/ https://r-spatial.github.io/s2/
 - Hexagonal: h3 geometry https://h3geo.org/
 - Hexagonal: ALFA-134414286. 2,600 hexagons coverage Alabama. Filed 2025-05-14. Effective 2025-08-24
 
 ::: {.notes}
-s2 was used by tinder
+s2 was used by Tinder
 h3 is used by Uber
 
 Has an ever increasing number of territories as you zoom in

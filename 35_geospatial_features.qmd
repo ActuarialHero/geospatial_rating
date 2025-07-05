@@ -1,6 +1,6 @@
-# Geospatial Data in Homeowners - Features
+# Geospatial Data in Homeowners - Features {background-color="#A1D6F4"}
 
-## Potentially predictive features for one or more perils
+## Potentially predictive features for one or more perils {background-color="#A1D6F4"}
 
 - Crime
 - Precipitation - U.S. National Weather Service (PRISM)SERFF: FAIG-134593537
@@ -20,7 +20,7 @@ Wind event counts of the risk location
 
 :::
 
-## SSURGO
+## SSURGO {background-color="#A1D6F4"}
 
 ### Description of the Data
 
@@ -42,7 +42,7 @@ SERFF: FAIG-134593537, MUOF-134283674, AMMH-134210246
 
 :::
 
-## SSURGO - Manhattan - Available Water Storage to 50 CM
+## SSURGO - Manhattan - Available Water Storage to 50 CM {background-color="#A1D6F4"}
 
 Shapefile + plain text files
 
@@ -79,7 +79,7 @@ leaflet(ssurgo) %>%
 
 
 
-## NLCD 
+## NLCD {background-color="#A1D6F4"}
 
 Raster image
 
@@ -97,8 +97,6 @@ Raster image
 
 nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
 
-dim(nlcd)
-
 # freq(nlcd) <- Count frequency of cells. Takes a long time to render
 plot(nlcd)
 
@@ -112,7 +110,7 @@ plot(nlcd)
 
 :::
 
-## NLCD - Manhattan
+## NLCD - Manhattan {background-color="#A1D6F4"}
 
 ```{r  NLCD Raster Manhattan}
 
