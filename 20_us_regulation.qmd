@@ -27,6 +27,10 @@ If you're looking at potential employers, it's actually possible to see how well
 
 :::
 
+## Statutory Financial Filing Requirements - Yellow Book {background-color="#A1D6F4"}
+
+![](images/yellow_book_farmers.jpg) 
+
 ## Rate Filing Requirements {background-color="#A1D6F4"}
 
 ::: {.incremental}
@@ -94,7 +98,6 @@ It's possible to see how your competitors calculate premiums
 Read more: https://www.casact.org/abstract/risk-classification-chapter-6
 
 ::: {.notes}
-Territory is one rating variable in a see of many
+Territory is one rating variable in a sea of many
 
 :::
-
