@@ -64,7 +64,7 @@ Data is expensive - some records cost millions of dollars
 ### All Perils vs. By-Peril Rating (One vs. Multiple Models)
 
 ::: {.incremental}
-Lots of bad things can happen to your home. Over the past ~20 years, there's been an increase in splitting home insurance premiums into components based on the peril of loss
+Lots of bad things can happen to your home. Over the past ~15-20 years, there's been an increase in splitting home insurance premiums into components based on the peril of loss
 
 - Some variables are predictive of hail damaging your roof
 - Some variables are predictive of your contents being stolen

@@ -90,55 +90,55 @@ ggplot(industry_dwp, aes(x = reorder(Line, Premium), y =  Premium)) +
 
 <!-- Add .fade-out to fade out -->
 ::: {.fragment}
-![Car](images/car.png) 
+![](images/car.png) 
 ::: 
 
 ::: {.fragment}
-![Boat](images/yacht.png) 
+![](images/yacht.png) 
 :::
 
 ::: {.fragment}
-![Plane](images/plane.png) 
+![](images/plane.png) 
 :::
 
 ::: {.fragment}
-![Rocket](images/rocket.png) 
+![](images/rocket.png) 
 :::
 
 ::: {.fragment}
-![Doctors, Nurses, and Lawyers](images/professionals.png) 
+![](images/professionals.png) 
 :::
 
 ::: {.fragment}
-![Workers in factory](images/factory.png) 
+![](images/factory.png) 
 :::
 
 ::: {.fragment}
-![Buildings](images/city.png) 
+![](images/city.png) 
 :::
 
 ::: {.fragment}
-![Oil Wels](images/oil_wells.png) 
+![](images/oil_wells.png) 
 :::
 
 ::: {.fragment}
-![Music Festivals](images/music_festival.png) 
+![](images/music_festival.png) 
 :::
 
 ::: {.fragment}
-![Orchestra](images/orchestra.png) 
+![](images/orchestra.png) 
 :::
 
 ::: {.fragment}
-![Body Parts](images/body_parts.png) 
+![](images/body_parts.png) 
 :::
 
 ::: {.fragment}
-![Pets](images/pets.png) 
+![](images/pets.png) 
 :::
 
 ::: {.fragment}
-![Half Court Shot](images/half_court.png) 
+![](images/half_court.png) 
 :::
 
 :::

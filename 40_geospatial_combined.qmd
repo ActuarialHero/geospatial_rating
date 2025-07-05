@@ -2,10 +2,22 @@
 
 ## Center Value
 
+- Centroid vs internal point
+
 ## Overlap
 
-### Predominate
-### Average
-### Groups 
+Mask
+
+Amount of data depends on the size of the territory
+Small territories have less data than large ones
+
+
+Then compute whatever static you want to try: min, median, average, max, predominate
 
 ## Buffering
+
+More consistent number of data elements
+Edges of the data set become problematic
+
+Circular
+Square

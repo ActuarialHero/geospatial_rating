@@ -3,24 +3,48 @@
 ## Potentially predictive features for one or more perils
 
 - Crime
-- Precipitation - U.S. National Weather Service - PRISM
-- Sea Surface Temperature / Sea Ice Coverage - NOAA
+- Precipitation - U.S. National Weather Service (PRISM)SERFF: FAIG-134593537
+- Sea Surface Temperature / Sea Ice Coverage (NOAA)
 - North American Land Data Assimilation System (NLDAS)
 - Stream Flow (USGS)
 - Reservoir Storage (USBR)
 - Dams (ICOLD)
+- Elevation (DEM)
 - Soils Survey Geographic Database (USDA) SSURGO
 - Land Use / Land Cover (NLCD)
 
+::: {.notes}
+
+Hail event counts of the risk location
+Wind event counts of the risk location 
+
+:::
+
 ## SSURGO
 
-https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo
+### Description of the Data
 
-- Download by county from https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
+- Download *by county* from https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
 - Shapefile with an ID
 - Separate Access database with data
 
+https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo
+
+### Sample variables 
+- Drainage classification 
+- Available water storage (varying depths)
+- Bedrock Depth
+- Ponding Frequency
+
+::: {.notes }
+
+SERFF: FAIG-134593537, MUOF-134283674, AMMH-134210246
+
+:::
+
 ## SSURGO - Manhattan - Available Water Storage to 50 CM
+
+Shapefile + plain text files
 
 ```{r}
 #| echo: true
@@ -53,8 +77,52 @@ leaflet(ssurgo) %>%
 
 ```
 
-## NLCD
 
-```{r}
+
+## NLCD 
+
+Raster image
+
+::: columns
+::: {.column width="40%"}
+![](images/nlcd_legend.jpg)
+:::
+
+::: {.column width="60%"}
+```{r Countrywide NLCD Raster}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+
+nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
+
+dim(nlcd)
+
+# freq(nlcd) <- Count frequency of cells. Takes a long time to render
+plot(nlcd)
 
 ```
+:::
+:::
+
+::: {.notes }
+30m x 30m grid
+105000 160000
+
+:::
+
+## NLCD - Manhattan
+
+```{r  NLCD Raster Manhattan}
+
+mgrs_man  <- read_sf("data_in/geo/MGRS_1km_18T_unprojected/MGRS_1km_18T_unprojected.shp") %>%
+  st_crop(xmin = -74.05, xmax = -73.90, ymin = 40.65, ymax = 40.90)
+
+#Transform extent
+extent_man <- st_transform(mgrs_man, crs(nlcd)) %>% extent()
+nlcd_man <- crop(nlcd, extent_man)
+
+plot(nlcd_man)
+```
+
