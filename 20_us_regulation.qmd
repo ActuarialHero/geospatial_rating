@@ -64,9 +64,12 @@ It's possible to see how your competitors calculate premiums
 
 ## Criteria for Selecting Rating Variables {background-color="#A1D6F4"}
 
+::: {.incremental}
+
 ::: columns
 
 ::: {.column width="50%"}
+
 
 - Actuarial
   - Accuracy
@@ -93,9 +96,15 @@ It's possible to see how your competitors calculate premiums
 - Legal
 
 :::
+
 :::
 
-Read more: https://www.casact.org/abstract/risk-classification-chapter-6
+:::
+
+::: {.fragment}
+Read more: [Finger - Risk Classification](https://www.casact.org/abstract/risk-classification-chapter-6)
+:::
+
 
 ::: {.notes}
 Territory is one rating variable in a sea of many
