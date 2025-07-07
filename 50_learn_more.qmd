@@ -1,4 +1,4 @@
-# Conclusion
+# Conclusion {background-color="#A1D6F4"}
 
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
@@ -11,9 +11,9 @@
 - Location-specific Data
 - Conclusion
 
-# Learn More!
+# Learn More! {background-color="#A1D6F4"}
 
-## High-level Resources
+## High-level Resources {background-color="#A1D6F4"}
 
 -   [Insurance Information Institute](https://www.iii.org/)
 -   [The Institutes](https://web.theinstitutes.org/)
@@ -24,11 +24,11 @@
 -   [National Association of Insurance Commissioners](https://content.naic.org/)
 -   [Wikipedia: State-Based Insurance Regulation](https://en.wikipedia.org/wiki/Insurance_regulatory_law#State-based_insurance_regulation)
 
-## Semi-technical Resources
+## Semi-technical Resources {background-color="#A1D6F4"}
 
 -   [An Actuarial Review of Homeowners By Peril Rating](https://ar.casact.org/an-actuarial-review-of-homeowners-by-peril-rating/)
 
-## Technical Resources
+## Technical Resources {background-color="#A1D6F4"}
 
 -   [Distributions for Actuaries](https://www.casact.org/sites/default/files/2021-02/02-Bahnemann.pdf)
 -   [Generalized Linear Models for Insurance Rating](https://www.casact.org/sites/default/files/2021-01/05-Goldburd-Khare-Tevet.pdf)

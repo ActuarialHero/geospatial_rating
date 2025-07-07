@@ -2,22 +2,107 @@
 
 ## Center Value
 
-- Centroid vs internal point
+- Fast way of assigning something to each territory
+
+- A single point may or may not be representative of the entire territory
+
+Using the centroid here, but internal point may be better
+
+```{r Centroid Lookup}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
+
+zip_ny <- zip_2024 %>%
+  filter(substr(ZCTA5CE20, 1, 2) %in% c("10", "11", "12", "13", "14"))
+
+zip_ny_nlcd_crs <- st_transform(zip_ny, crs(nlcd))
+
+centroids <- st_centroid(zip_ny_nlcd_crs)
+centroids$land_cover <- extract(nlcd, centroids)
+
+ centroids %>% st_drop_geometry() %>%
+   dplyr::select(ZCTA5CE20, land_cover) %>%
+   head()
+```
+
+
 
 ## Overlap
 
-Mask
+- Mask the raster with the shapes and summarize the data that fall within each shape
 
-Amount of data depends on the size of the territory
-Small territories have less data than large ones
+- Amount of data depends on the size of the territory
+- Small territories have less data than large ones
 
+``` {r Masking example}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+for (i in 1:nrow(zip_ny_nlcd_crs)) {
+  if(i == 1) {
+    all_data <- NULL
+  } 
 
-Then compute whatever static you want to try: min, median, average, max, predominate
+  zip <- zip_ny_nlcd_crs[i,]
+  zip_code <- zip$ZCTA5CE20[1]
+  
+  cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
+  mr <- mask(cr, zip)
+
+  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
+}
+
+all_data <- bind_rows(all_data) %>%
+  mutate(count = as.numeric(count))
+
+# Predominant land cover
+all_data %>% group_by(ZCTA5CE20) %>% arrange(ZCTA5CE20, desc(count)) %>% top_n(1)
+
+# Percent of ZIP for each land cover
+all_data %>% group_by(ZCTA5CE20) %>% mutate(percent = count / sum(count))
+```
+Then compute whatever static you want to try: min, median, average, max, predominant
 
 ## Buffering
 
-More consistent number of data elements
-Edges of the data set become problematic
+- Draw a square or circular buffer around each centroid
+- More consistent number of data elements
+- May fall short or go beyond the edges of the shape
+- Edges of the data set become problematic
+- This example uses circles
 
-Circular
-Square
+## Buffering Example
+
+```{r Buffering example}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+zip_buffers <- st_buffer(centroids, dist = 1000)  # 1 km buffer
+
+for (i in 1:nrow(zip_buffers)) {
+  if(i == 1) {
+    all_data <- NULL
+  } 
+
+  zip <- zip_ny_nlcd_crs[i,]
+  zip_code <- zip$ZCTA5CE20[1]
+  
+  cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
+  mr <- mask(cr, zip)
+
+  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
+}
+
+all_data <- bind_rows(all_data) %>%
+  mutate(count = as.numeric(count))
+
+# Predominant land cover
+all_data %>% group_by(ZCTA5CE20) %>% arrange(ZCTA5CE20, desc(count)) %>% top_n(1)
+
+# Percent of ZIP for each land cover
+all_data %>% group_by(ZCTA5CE20) %>% mutate(percent = count / sum(count))
+```
+

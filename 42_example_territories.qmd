@@ -2,7 +2,7 @@
 
 A review of the 3 largest New York Home Insurance Companies
 
-## No. 3: Chubb (626) - Chubb National Insurance Company (10052)
+## No. 3: Chubb (626) - Chubb National Insurance Company (10052) {background-color="#A1D6F4"}
 
 Perils:
 
@@ -16,13 +16,13 @@ Territories:
 
 For example, New York County is split into three pieces:
 
-- Governors Island 97
-- Fort Charles 05
-- Rest of County 18
+- Governors Island - Territory 97
+- Fort Charles - Territory 05
+- Rest of County - Territory 18
 
 I'm not even going to try...
 
-## No 2: Allstate Insurance Group (8) - Allstate Vehicle and Property Insurance Company (37907)
+## No 2: Allstate Insurance Group (8) - Allstate Vehicle and Property Insurance Company (37907) {background-color="#A1D6F4"}
 
 ZIP Code-based territories
 
@@ -33,7 +33,7 @@ Their esurance company in Nevada uses 0.05, 0.1, 0.2, 0.4 grid  SERFF ESUR-12986
 
 :::
 
-## Allstate - Hurricane
+## Allstate - Hurricane {background-color="#A1D6F4"}
 
 ```{r Allstate NY hurricane factors}
 #| echo: true
@@ -73,7 +73,7 @@ leaflet(zip_allstate_ny) %>%
   addLegend(pal = pal, values = ~hurricane, title = "Hurricane Factor")
 ```
 
-## Allstate - Theft
+## Allstate - Theft {background-color="#A1D6F4"}
 
 ```{r Allstate NY Theft}
 #| echo: true
@@ -100,7 +100,7 @@ leaflet(zip_allstate_ny) %>%
   addLegend(pal = pal, values = ~theft, title = "Hurricane Factor")
 ```
 
-## Allstate - Weather Water
+## Allstate - Weather Water {background-color="#A1D6F4"}
 
 ```{r Allstate NY Weather Water}
 #| echo: true
@@ -127,7 +127,7 @@ leaflet(zip_allstate_ny) %>%
   addLegend(pal = pal, values = ~water_weather, title = "Weather Water")
 ```
 
-## Allstate - Wind
+## Allstate - Wind {background-color="#A1D6F4"}
 
 ```{r Allstate NY Wind}
 #| echo: true

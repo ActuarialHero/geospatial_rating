@@ -76,8 +76,14 @@ Job Categories to this group:
 :::
 
 
-## Agenda {background-color="#A1D6F4"}
+## Slides {background-color="#A1D6F4"}
 
+Slides are available here:
+
+![](images/presentation_qr_code.png)
+
+
+## Agenda {background-color="#A1D6F4"}
 
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
