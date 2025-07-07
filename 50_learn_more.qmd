@@ -27,6 +27,7 @@
 ## Semi-technical Resources {background-color="#A1D6F4"}
 
 -   [An Actuarial Review of Homeowners By Peril Rating](https://ar.casact.org/an-actuarial-review-of-homeowners-by-peril-rating/)
+-   [Finger - Risk Classification](https://www.casact.org/abstract/risk-classification-chapter-6)
 
 ## Technical Resources {background-color="#A1D6F4"}
 
