@@ -2,14 +2,15 @@
 
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
-- Modeling the Cost of Home Insurance
 - Geospatial Data in Homeowners
   - Territories
   - Features
   - Combining Territories & Features
+- Modeling the Cost of Home Insurance
 - Example Territory Maps
 - Location-specific Data
 - Conclusion
+- Happy Hour
 
 # Learn More! {background-color="#A1D6F4"}
 

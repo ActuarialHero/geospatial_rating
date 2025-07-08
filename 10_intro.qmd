@@ -78,7 +78,7 @@ Job Categories to this group:
 
 ## Slides {background-color="#A1D6F4"}
 
-Slides are available here:
+Slides are available here (ZIP file in Google Docs):
 
 ![](images/presentation_qr_code.png)
 
@@ -87,11 +87,11 @@ Slides are available here:
 
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
-- Modeling the Cost of Home Insurance
 - Geospatial Data in Homeowners
   - Territories
   - Features
   - Combining Territories & Features
+- Modeling the Cost of Home Insurance
 - Example Territory Maps
 - Location-specific Data
 - Conclusion
