@@ -110,3 +110,52 @@ Lognormal, Gamma, and Pareto are common severity distributions. Note that these 
   - Alaska wraps around to the Eastern Hemisphere, so extra edge cases
 
 :::
+
+## Criteria for Selecting Rating Variables {background-color="#A1D6F4"}
+
+::: {.incremental}
+
+::: columns
+
+::: {.column width="50%"}
+
+
+- Actuarial
+  - Accuracy
+  - Homogeneity
+  - Credibility
+  - Reliability
+- Operational
+  - Defined Objectively
+  - Unambiguous
+  - Mutually Exclusive & Exhaustive
+  - Minimize Likelihood of Administrative Error
+  - Cost-effective
+  - Verifiability
+
+:::
+
+::: {.column width="50%"}
+
+- Social
+  - Privacy
+  - Causality
+  - Controllability
+  - Affordability
+- Legal
+
+:::
+
+:::
+
+:::
+
+::: {.fragment}
+Read more: [Finger - Risk Classification](https://www.casact.org/abstract/risk-classification-chapter-6)
+:::
+
+
+::: {.notes}
+Territory, and the variables in your territory model, are just a small part of the rating plan
+
+:::
