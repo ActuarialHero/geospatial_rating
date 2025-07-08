@@ -47,7 +47,6 @@ State Laws
 - Grids in some states but city in MN
 :::
 
-https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html
 
 ## Counties {background-color="#A1D6F4"}
 
@@ -58,11 +57,12 @@ https://www.census.gov/geographies/reference-files/time-series/geo/tallies.html
 
 # Read & Filter Census Tract File for New York County
 ny_counties  <- read_sf("data_in/geo/tl_2024_us_county/tl_2024_us_county.shp") %>%
-  filter(STATEFP == "36")
+  filter(STATEFP == "36") # New York FIPS code is 36
 
+# Plot using leaflet
 leaflet(ny_counties) %>%
-  addPolygons(weight = 0.5, opacity = 1.0) %>%
-  addTiles()
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
 ```
 
 ::: {.notes}
@@ -78,9 +78,8 @@ Radically different sizes
 
 :::
 
-## ZIP Codes - Reading in Shapefiles {background-color="#A1D6F4"}
 
-ZIP Code Tabulation Areas
+## ZIP Codes (ZIP Code Tabulation Areas) {background-color="#A1D6F4"}
 
 
 ```{r Read ZCTA File}
@@ -91,14 +90,15 @@ ZIP Code Tabulation Areas
 # Read ZIP Code shapefile for United States
 zip_2024  <- read_sf("data_in/geo/tl_2024_us_zcta520/tl_2024_us_zcta520.shp")
 
-# Filter to New York, NY ZIP codes (sort of)
+# Filter to New York, NY ZIP codes
+# ...sort of - Marble Hill Chopped off
 zip_manhattan <- zip_2024 %>%
   filter(ZCTA5CE20 %in% c(as.character(seq(from = 10000, to = 10299))))
 
 # Plot on top of Open Street Maps basemap
 leaflet(zip_manhattan) %>%
-  addPolygons(weight = 0.5, opacity = 1.0) %>%
-  addTiles()
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
 ```
 
 ::: {.notes}
@@ -113,7 +113,6 @@ Manhattan is a nice set of territories here. A couple of notes:
 :::
 
 
-
 ## Census Tracks {background-color="#A1D6F4"}
 
 ```{r Read Census Tract File}
@@ -126,8 +125,8 @@ new_york_county_tracts  <- read_sf("data_in/geo/tl_2024_36_tract/tl_2024_36_trac
   filter(STATEFP == "36", COUNTYFP == "061")
 
 leaflet(new_york_county_tracts) %>%
-  addPolygons(weight = 0.5, opacity = 1.0) %>%
-  addTiles()
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
 ```
 
 ::: {.notes}
@@ -147,8 +146,8 @@ new_york_county_bg  <- read_sf("data_in/geo/tl_2024_36_bg/tl_2024_36_bg.shp") %>
   filter(STATEFP == "36", COUNTYFP == "061")
 
 leaflet(new_york_county_bg) %>%
-  addPolygons(weight = 0.5, opacity = 1.0) %>%
-  addTiles()
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
 ```
 
 ::: {.notes}
@@ -171,6 +170,7 @@ Census tracts are broken into Census block groups
 ny_tabblock20  <- read_sf("data_in/geo/tl_2024_36_tabblock20/tl_2024_36_tabblock20.shp") %>%
   filter(STATEFP20 == "36", COUNTYFP20 == "061") 
 
+# Layering blocks and tracts together
 leaflet() %>%
   addTiles(group = "OSM (Default)") %>%
   addPolygons(data = ny_tabblock20, weight = 0.5, opacity = 1.0, group = "Blocks") %>%
@@ -221,7 +221,7 @@ tabblock_raster20 <- rasterize(ny_tabblock20, tabblock_raster, field = "GEOID_NU
 
 tabblock_compare <- tabblock_raster10 == tabblock_raster20
 
-# plot(tabblock_compare)
+# Set up color palatte
 tabblock_pal <- colorNumeric(c("#67a9cf", "#ef8a62"), values(tabblock_compare),
                     na.color = "transparent")
 
@@ -229,9 +229,10 @@ leaflet() %>%
   addTiles() %>%
   addRasterImage(tabblock_compare, colors = tabblock_pal, opacity = 0.5)
 
+# Summary statistics
 freq(tabblock_compare, useNA = 'no') %>%
   as.data.frame() %>%
-  mutate(Percentage = count/sum(count)) %>%
+  mutate(Fraction = count/sum(count)) %>%
   kbl(format = "markdown", format.args = list(big.mark = ",")) 
 ```
 
@@ -244,6 +245,7 @@ Rasters tend to default to using disk space while shapefiles are in memory.
 
 Historically, overlaying two shapefiles for calculations has been monstrously expensive time-wise
 :::
+
 
 ## Grids {background-color="#A1D6F4"}
 
@@ -258,9 +260,8 @@ mgrs  <- read_sf("data_in/geo/MGRS_1km_18T_unprojected/MGRS_1km_18T_unprojected.
   st_crop(xmin = -74.05, xmax = -73.90, ymin = 40.65, ymax = 40.90)
 
 leaflet(mgrs) %>%
-  addPolygons(weight = 0.5, opacity = 1.0) %>%
-  addTiles()
-
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
 ```
 
 ::: {.notes}
@@ -272,6 +273,7 @@ leaflet(mgrs) %>%
 https://earth-info.nga.mil/index.php?dir=coordsys&action=mgrs-1km-polyline-dloads
 
 :::
+
 
 ## Newer Geometries {background-color="#A1D6F4"}
 
