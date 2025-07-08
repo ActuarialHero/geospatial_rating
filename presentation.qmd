@@ -7,16 +7,16 @@
 
 {{< include 20_us_regulation.qmd >}}
 
-<!-- {{< include 25_modeling.qmd >}} -->
+{{< include 30_geospatial_territories.qmd >}}
 
-<!-- {{< include 30_geospatial_territories.qmd >}} -->
+{{< include 35_geospatial_features.qmd >}}
 
-<!-- {{< include 35_geospatial_features.qmd >}} -->
+{{< include 40_geospatial_combined.qmd >}}
 
-<!-- {{< include 40_geospatial_combined.qmd >}} -->
+{{< include 25_modeling.qmd >}}
 
-<!-- {{< include 42_example_territories.qmd >}} -->
+{{< include 42_example_territories.qmd >}}
 
-<!-- {{< include 45_location_specific.qmd >}} -->
+{{< include 45_location_specific.qmd >}}
 
-<!-- {{< include 50_learn_more.qmd >}} -->
+{{< include 50_learn_more.qmd >}}
