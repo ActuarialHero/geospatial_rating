@@ -82,7 +82,6 @@ leaflet(ssurgo) %>%
     values = ~aws050wta,
     position = "bottomright",
   title = "Available Water Storage to a Depth of 50 CM")
-
 ```
 
 :::{.notes }
@@ -104,10 +103,8 @@ Giant Raster (pixel) image
 #| code-fold: true
 #| code-summary: "Show code"
 
+nlcd <- rast("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
 
-nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
-
-# freq(nlcd) <- Count frequency of cells. Takes a long time to render
 plot(nlcd)
 
 # leaflet takes too long for this one
@@ -129,6 +126,7 @@ Depicts the predominant thematic land cover class within the mapping year with r
 
 :::
 
+
 ## NLCD - Manhattan {background-color="#A1D6F4"}
 
 ```{r  NLCD Raster Manhattan}
@@ -144,10 +142,9 @@ plot(nlcd_man)
 # leaflet() %>%
 #   addTiles() %>%
 #   addRasterImage(nlcd_man, opacity = 0.5)
-
 ```
 
 :::{.notes }
-Manhattan is quite uninteresting - lots of 
+Manhattan is quite uninteresting - lots of concrete
 
 ::: 

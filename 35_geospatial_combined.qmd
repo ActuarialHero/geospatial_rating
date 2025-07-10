@@ -11,25 +11,27 @@
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read in raster
-nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
+# Point to raster
+# nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
+nlcd <- rast("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
 
-# Grab state of New York ZIP Codes
-zip_ny <- zip_2024 %>%
-  filter(substr(ZCTA5CE20, 1, 2) %in% c("10", "11", "12", "13", "14"))
+# Filter to New York, NY ZIP codes... sort of - Marble Hill Chopped off
+zip_manhattan <- zip_2024 %>%
+  filter(ZCTA5CE20 %in% c(as.character(seq(from = 10000, to = 10299))))
 
 # Transform CRS
-zip_ny_nlcd_crs <- st_transform(zip_ny, crs(nlcd))
+zip_manhattan_nlcd_crs <- st_transform(zip_manhattan, crs(nlcd))
 
 # Calculate the centroids
-centroids <- st_centroid(zip_ny_nlcd_crs)
+centroids <- st_centroid(zip_manhattan_nlcd_crs)
 
-# Extract land cover value for each centroid
-centroids$land_cover <- extract(nlcd, centroids)
+# Extract values at centroids
+centroid_values <- extract(nlcd, centroids, layer = 1)
 
 # Join the data
 centroid_values <- centroids %>% st_drop_geometry() %>%
-   dplyr::select(ZCTA5CE20, land_cover) %>%
+  bind_cols(centroid_values) %>%
+  dplyr::select(ZCTA5CE20, land_cover = value) %>%
   arrange(ZCTA5CE20, land_cover)
 ```
 
@@ -54,25 +56,35 @@ datatable(centroid_values, rownames = FALSE, options = list(pagelength = 8))
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
-for (i in 1:nrow(zip_ny_nlcd_crs)) {
+for (i in 1:nrow(zip_manhattan_nlcd_crs)) {
 #for (i in 1:25) {
   if(i == 1) {
     all_data <- NULL
   } 
 
-  zip <- zip_ny_nlcd_crs[i,]
+  zip <- zip_manhattan_nlcd_crs[i,]
   zip_code <- zip$ZCTA5CE20[1]
   
   cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
   mr <- mask(cr, zip)
 
-  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
+  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, bylayer = FALSE)))
 }
 
 masked_freq <- bind_rows(all_data) %>%
   mutate(count = as.numeric(count)) %>%
   rename(land_cover = value) %>%
   arrange(ZCTA5CE20, land_cover)
+
+# Example
+selected_zip <- "10034"
+zip <- filter(zip_manhattan_nlcd_crs, ZCTA5CE20 == selected_zip)
+
+cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
+mr <- mask(cr, zip)
+
+plot(mr)
+plot(zip, add = TRUE, col = NA, title = selected_zip)
 ```
 Then compute whatever static you want to try: min, median, average, max, predominant
 
@@ -144,7 +156,7 @@ for (i in 1:nrow(zip_buffers)) {
     all_data <- NULL
   } 
 
-  zip <- zip_ny_nlcd_crs[i,]
+  zip <- zip_buffers[i,]
   zip_code <- zip$ZCTA5CE20[1]
   
   # Crop and mask
@@ -152,7 +164,7 @@ for (i in 1:nrow(zip_buffers)) {
   mr <- mask(cr, zip)
 
   # Calculate frequencies
-  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
+  all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, bylayer = FALSE)))
 }
 
 # Build the complete data set
@@ -160,6 +172,17 @@ buffered_freq <- bind_rows(all_data) %>%
   mutate(count = as.numeric(count)) %>%
   rename(land_cover = value) %>%
   arrange(ZCTA5CE20, land_cover)
+
+# Example
+
+selected_zip <- "10034"
+zip <- filter(zip_buffers, ZCTA5CE20 == selected_zip)
+
+cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
+mr <- mask(cr, zip)
+
+plot(mr)
+plot(filter(zip_manhattan_nlcd_crs, ZCTA5CE20 == selected_zip), col = NA,  add = TRUE, title = selected_zip)
 ```
 
 ## Buffered Output Table {background-color="#A1D6F4"}
@@ -203,4 +226,36 @@ buffered_percent <- buffered_freq %>%
 
 datatable(buffered_percent, rownames = FALSE, options = list(pagelength = 8)) %>%
   formatPercentage('percent', digits = 1)
+```
+
+## Masked vs. Buffered {background-color="#A1D6F4"}
+
+```{r Buffered vs. Percent}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# full_join data sets
+masked_vs_buffered_percent <- masked_percent %>%
+  full_join(buffered_percent, by = c("ZCTA5CE20", "land_cover"), suffix = c(".mask", ".buff"))
+
+datatable(masked_vs_buffered_percent, rownames = FALSE, options = list(pagelength = 8)) %>%
+  formatPercentage('percent.mask', digits = 1) %>%
+  formatPercentage('percent.buff', digits = 1)
+```
+
+## Masked vs. Buffered - NAs {background-color="#A1D6F4"}
+
+```{r Buffered vs. Percent - NAs}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Filter to nulls
+masked_vs_buffered_percent_null <- masked_vs_buffered_percent %>%
+  filter(is.na(count.mask) | is.na(count.buff))
+
+datatable(masked_vs_buffered_percent_null, rownames = FALSE, options = list(pagelength = 8)) %>%
+  formatPercentage('percent.mask', digits = 1) %>%
+  formatPercentage('percent.buff', digits = 1)
 ```

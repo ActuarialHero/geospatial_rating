@@ -113,18 +113,20 @@ Log-normal, Gamma, and Pareto are common severity distributions. Note that these
 
 ## Criteria for Selecting Rating Variables {background-color="#A1D6F4"}
 
-::: {.incremental}
-
 ::: columns
 
 ::: {.column width="50%"}
 
 
+::: {.fragment}
 - Actuarial
   - Accuracy
   - Homogeneity
   - Credibility
   - Reliability
+  
+::: 
+::: {.fragment}
 - Operational
   - Defined Objectively
   - Unambiguous
@@ -134,21 +136,25 @@ Log-normal, Gamma, and Pareto are common severity distributions. Note that these
   - Verifiable
 
 :::
+:::
 
 ::: {.column width="50%"}
-
+::: {.fragment}
 - Social
   - Privacy
   - Causality
   - Controllable
   - Affordability
+  
+:::
+::: {.fragment}
 - Legal
-
 :::
 
 :::
 
 :::
+
 
 ::: {.fragment}
 Read more: [Finger - Risk Classification](https://www.casact.org/abstract/risk-classification-chapter-6)

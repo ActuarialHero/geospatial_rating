@@ -45,14 +45,14 @@ If you're looking at potential employers, it's actually possible to see how well
 - [Wikipedia page](https://en.wikipedia.org/wiki/Insurance_regulatory_law#State-based_insurance_regulation) on state-based insurance regulation
 
 - Summary: Think of this as having 51 separate external peer reviewers for anything you build
+
+- **BUT**, you also get to see what goes into your competitor's pricing algorithms
 :::
 
 
 ## Rate Order Calculation {background-color="#A1D6F4"}
 
-- See Excel file
-
-- [Excel File](../allstate_roc.xlsx)
+- [See Excel File](../allstate_roc.xlsx)
 
 
 ::: {.notes}

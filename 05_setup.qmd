@@ -7,6 +7,7 @@ library(readxl)
 library(sf)
 library(leaflet)
 library(raster)
+library(terra)
 library(DT)
 ```
 
@@ -52,6 +53,8 @@ muaggatt_names <- c(
   "hydclprs",
   "awmmfpwwta",
   "mukey")
+
+
 
 muaggatt_types <- c("cclnnnnnccnnnnnccclnnncccccccccccccncnnc")
 

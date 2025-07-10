@@ -49,12 +49,16 @@ State Laws
 
 ## Key R Packages {background-color="#A1D6F4"}
 
-:::{.incrementa}
+:::{.incremental}
 - sf - Package for working with simple features. Useful for shapefile data
   - Replaces rgdal and rgeos
 - raster - For working with raster data
+- terra - Newer package for working with raster data
 - leaflet - For plotting shapefiles and rasters on top of a OpenStreetMaps base layer with some interactivity. Much nicer than plot, which we'll also see
 
+:::
+
+::: {.fragment}
 We'll also use a host of tidyverse favorites, including dplyr and ggplot2.
 :::
 
@@ -88,8 +92,31 @@ Radically different sizes. Some of the unorganized territories in Alaska are hug
 
 :::
 
-
 ## ZIP Codes (ZIP Code Tabulation Areas) {background-color="#A1D6F4"}
+
+```{r New York ZIP Codes}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Read ZIP Code shapefile for United States
+zip_2024  <- read_sf("data_in/geo/tl_2024_us_zcta520/tl_2024_us_zcta520.shp")
+
+# Filter to New York (state)
+zip_ny <- zip_2024 %>%
+  filter(substr(ZCTA5CE20, 1, 2) %in% c("10", "11", "12", "13", "14"))
+
+# Plot on top of Open Street Maps basemap
+leaflet(zip_ny) %>%
+  addTiles() %>%
+  addPolygons(weight = 0.5, opacity = 1.0)
+```
+
+:::{.notes}
+
+:::
+  
+## ZIP Codes - Manhattan {background-color="#A1D6F4"}
 
 
 ```{r Read ZCTA File}
