@@ -35,3 +35,31 @@
 -   [Distributions for Actuaries](https://www.casact.org/sites/default/files/2021-02/02-Bahnemann.pdf)
 -   [Generalized Linear Models for Insurance Rating](https://www.casact.org/sites/default/files/2021-01/05-Goldburd-Khare-Tevet.pdf)
 -   [An Actuarial Review of Homeowners By Peril Rating](https://ar.casact.org/an-actuarial-review-of-homeowners-by-peril-rating/)
+
+## Data Sources (1/2) {background-color="#A1D6F4"}
+
+### Census Bureau Shapefiles
+
+- ftp2.census.gov username "anonymous" / no password
+- State Shapefile: ftp://ftp2.census.gov/geo/tiger/TIGER2024/STATE/tl_2024_us_state.zip
+- County Shapefile: ftp://ftp2.census.gov/geo/tiger/TIGER2024/COUNTY/tl_2024_us_county.zip
+- ZIP Code Tabulation Areas: ftp://ftp2.census.gov/geo/tiger/TIGER2024/ZCTA520/tl_2024_us_zcta520.zip
+- Census Tract: ftp://ftp2.census.gov/geo/tiger/TIGER2024/TRACT/tl_2024_36_tract.zip
+- Census Block Group: ftp://ftp2.census.gov/geo/tiger/TIGER2024/BG/tl_2024_36_bg.zip
+- Census Block: ftp://ftp2.census.gov/geo/tiger/TIGER2024/TABBLOCK20/tl_2024_36_tabblock20.zip
+
+## Data Sources (2/2) {background-color="#A1D6F4"}
+
+### Military Grid Reference System (MGRS) Shapefile
+
+- 1km grid: https://earth-info.nga.mil/index.php?dir=coordsys&action=mgrs-1km-polyline-dloads
+
+### SSURGO Web Soil Survey Shapefile
+
+- Download **by county**: https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
+- New York county: https://websoilsurvey.sc.egov.usda.gov/DSD/Download/Cache/SSA/wss_SSA_NY061_soildb_US_2003_[2024-08-29].zip
+
+###  National Land Cover Database Raster
+
+- Website: https://www.mrlc.gov/data
+- 2023 NLCD Raster: https://www.mrlc.gov/downloads/sciweb1/shared/mrlc/data-bundles/Annual_NLCD_LndCov_2023_CU_C1V1.zip

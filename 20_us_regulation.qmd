@@ -4,32 +4,30 @@
 
 Nothing excites an audience of open source statistical programming language aficionados as much as a talk about U.S. Insurance Regulation...
 :::
+
+
 ## Statutory Financial Filing Requirements {background-color="#A1D6F4"}
 
 ::: {.incremental}
+
 - Insurance companies in the U.S. have to file financial statements quarterly and annual with the National Association of Insurance Commissioners (NAIC)
-
-- The statements summarize premiums, losses, and expenses
-
-- Unlike GAAP financials, which focus on companies as a going concern, these focus on the financial viability of the company
-
-- Non-public companies have to submit this too
-
-
 - This is the underlying source for the data we've seen thus far
-
+- The statements summarize premiums, losses, and expenses
+- Unlike GAAP financials, which focus on companies as a going concern, these focus on the financial viability of the company
+- Non-public companies have to submit this too
+- You know how well your company is doing, even if it's not public!
 - Typically called the "Yellow Book" for P&C Insurance Companies
-
 :::
 
 ::: {.notes}
 If you're looking at potential employers, it's actually possible to see how well they're doing, even for non-publicly traded ones.
-
 :::
+
 
 ## Statutory Financial Filing Requirements - Yellow Book {background-color="#A1D6F4"}
 
 ![](images/yellow_book_farmers.jpg) 
+
 
 ## Rate Filing Requirements {background-color="#A1D6F4"}
 
@@ -42,22 +40,24 @@ If you're looking at potential employers, it's actually possible to see how well
 
 - Some require approval before you can use them to price insurance
 
-- Some have predictive modeling checklists that must be completed
+- Some have checklists specific to predictive modeling
 
 - [Wikipedia page](https://en.wikipedia.org/wiki/Insurance_regulatory_law#State-based_insurance_regulation) on state-based insurance regulation
 
-- Summary: Think of this as having 51 separate peer reviewers for any data engineering calculation or model you create
-
+- Summary: Think of this as having 51 separate external peer reviewers for anything you build
 :::
+
 
 ## Rate Order Calculation {background-color="#A1D6F4"}
 
 - See Excel file
 
-- [Excel File](../references_public/allstate_roc.xlsx)
+- [Excel File](../allstate_roc.xlsx)
+
 
 ::: {.notes}
+Now the advantage of having to submit this information, is that a lot of it is public.
 
-It's possible to see how your competitors calculate premiums 
+It's possible to see how your competitors calculate premiums. We can pull up one of the Allstate algorithms in Wisconsin.
 
 :::

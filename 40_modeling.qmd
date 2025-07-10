@@ -89,7 +89,7 @@ By-Peril rating - 2010ish
 The most common pure premium distribution is Tweedie, which is a zero-modified Poisson distribution
 
 Poisson is probably the most common frequency distribution. Negative Binomial is sometimes also used
-Lognormal, Gamma, and Pareto are common severity distributions. Note that these are parameterized differently in actuarial literature to allow for easy scaling due to inflation.
+Log-normal, Gamma, and Pareto are common severity distributions. Note that these are parameterized differently in actuarial literature to allow for easy scaling due to inflation.
 
 :::
 
@@ -131,7 +131,7 @@ Lognormal, Gamma, and Pareto are common severity distributions. Note that these 
   - Mutually Exclusive & Exhaustive
   - Minimize Likelihood of Administrative Error
   - Cost-effective
-  - Verifiability
+  - Verifiable
 
 :::
 
@@ -140,7 +140,7 @@ Lognormal, Gamma, and Pareto are common severity distributions. Note that these 
 - Social
   - Privacy
   - Causality
-  - Controllability
+  - Controllable
   - Affordability
 - Legal
 
@@ -157,5 +157,32 @@ Read more: [Finger - Risk Classification](https://www.casact.org/abstract/risk-c
 
 ::: {.notes}
 Territory, and the variables in your territory model, are just a small part of the rating plan
+
+:::
+
+## Modeling Process {background-color="#A1D6F4"}
+
+![](images/xkcd_1838.png)
+
+alt-text: The pile gets soaked with data and starts to get mushy over time, so it's technically recurrent.
+
+[Machine Learning xkcd 1838](https://xkcd.com/1838/)
+
+
+:::{.notes }
+Unfortunately, I don't have a public data set to build a model, so you'll have to stir your pile of linear algebra in your head
+:::
+
+## Implementation Notes{background-color="#A1D6F4"}
+
+:::{.incremental}
+
+- Territory Tables are pre-scored and static
+- May need to update the filing for re-scoring. **Usually** this is easier than the initial filing
+- Model version used based on policy effective date
+  - New Business may pick up the new model before Renewal Business
+- You need to keep historical version of the models:
+  - You may need to adjust policies after they're issued (change limit, deductible, etc.), so you go back in time to the model in effect when the policy was effective
+  - State insurance departments will audit your premium calculations to validate they match the filed rating plan
 
 :::

@@ -1,36 +1,49 @@
 # Combining Territory Boundaries and Variables {background-color="#A1D6F4"}
 
-## Center Value
+## Center Value {background-color="#A1D6F4"}
 
-- Fast way of assigning something to each territory
-
+- Fast way of assigning **something** to each territory
 - A single point may or may not be representative of the entire territory
-
-Using the centroid here, but internal point may be better
+- Using the centroid here, but internal point may be better
 
 ```{r Centroid Lookup}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
 
+# Read in raster
 nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
 
+# Grab state of New York ZIP Codes
 zip_ny <- zip_2024 %>%
   filter(substr(ZCTA5CE20, 1, 2) %in% c("10", "11", "12", "13", "14"))
 
+# Transform CRS
 zip_ny_nlcd_crs <- st_transform(zip_ny, crs(nlcd))
 
+# Calculate the centroids
 centroids <- st_centroid(zip_ny_nlcd_crs)
+
+# Extract land cover value for each centroid
 centroids$land_cover <- extract(nlcd, centroids)
 
- centroids %>% st_drop_geometry() %>%
+# Join the data
+centroid_values <- centroids %>% st_drop_geometry() %>%
    dplyr::select(ZCTA5CE20, land_cover) %>%
-   head()
+  arrange(ZCTA5CE20, land_cover)
 ```
 
+## Centroid Data Table {background-color="#A1D6F4"}
 
+```{r Centroid Table}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
 
-## Overlap
+datatable(centroid_values, rownames = FALSE, options = list(pagelength = 8))
+```
+
+## Overlap {background-color="#A1D6F4"}
 
 - Mask the raster with the shapes and summarize the data that fall within each shape
 
@@ -42,6 +55,7 @@ centroids$land_cover <- extract(nlcd, centroids)
 #| code-fold: true
 #| code-summary: "Show code"
 for (i in 1:nrow(zip_ny_nlcd_crs)) {
+#for (i in 1:25) {
   if(i == 1) {
     all_data <- NULL
   } 
@@ -55,18 +69,57 @@ for (i in 1:nrow(zip_ny_nlcd_crs)) {
   all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
 }
 
-all_data <- bind_rows(all_data) %>%
-  mutate(count = as.numeric(count))
-
-# Predominant land cover
-all_data %>% group_by(ZCTA5CE20) %>% arrange(ZCTA5CE20, desc(count)) %>% top_n(1)
-
-# Percent of ZIP for each land cover
-all_data %>% group_by(ZCTA5CE20) %>% mutate(percent = count / sum(count))
+masked_freq <- bind_rows(all_data) %>%
+  mutate(count = as.numeric(count)) %>%
+  rename(land_cover = value) %>%
+  arrange(ZCTA5CE20, land_cover)
 ```
 Then compute whatever static you want to try: min, median, average, max, predominant
 
-## Buffering
+## Masked Output Table {background-color="#A1D6F4"}
+
+```{r Masked Output Table}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+datatable(masked_freq, rownames = FALSE, options = list(pagelength = 8))
+```
+
+## Masked Predominant Land Cover {background-color="#A1D6F4"}
+
+```{r Masked Predominant Land Cover}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Predominant land cover
+masked_predominant <- masked_freq %>%
+  group_by(ZCTA5CE20) %>%
+  arrange(ZCTA5CE20, desc(count)) %>%
+  top_n(1)
+
+datatable(masked_predominant, rownames = FALSE, options = list(pagelength = 8))
+```
+
+## Masked Pecent Land Cover {background-color="#A1D6F4"}
+
+```{r Masked Percent Land Cover}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Percent of ZIP for each land cover
+masked_percent <- masked_freq %>%
+  group_by(ZCTA5CE20) %>%
+  mutate(percent = count / sum(count)) %>%
+  arrange(ZCTA5CE20, land_cover)
+
+datatable(masked_percent, rownames = FALSE, options = list(pagelength = 8)) %>%
+  formatPercentage('percent', digits = 1)
+```
+
+## Buffering {background-color="#A1D6F4"}
 
 - Draw a square or circular buffer around each centroid
 - More consistent number of data elements
@@ -74,15 +127,19 @@ Then compute whatever static you want to try: min, median, average, max, predomi
 - Edges of the data set become problematic
 - This example uses circles
 
-## Buffering Example
+## Buffering Example {background-color="#A1D6F4"}
 
 ```{r Buffering example}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
+
+# Create buffers
 zip_buffers <- st_buffer(centroids, dist = 1000)  # 1 km buffer
 
+# Loop through ZIPs
 for (i in 1:nrow(zip_buffers)) {
+#for (i in 1:25) {
   if(i == 1) {
     all_data <- NULL
   } 
@@ -90,19 +147,60 @@ for (i in 1:nrow(zip_buffers)) {
   zip <- zip_ny_nlcd_crs[i,]
   zip_code <- zip$ZCTA5CE20[1]
   
+  # Crop and mask
   cr <- crop(nlcd, extent(zip)) # Cropping first makes this faster
   mr <- mask(cr, zip)
 
+  # Calculate frequencies
   all_data[[i]] <- data.frame(cbind(ZCTA5CE20 = zip_code, freq(mr, useNA = "no")))
 }
 
-all_data <- bind_rows(all_data) %>%
-  mutate(count = as.numeric(count))
-
-# Predominant land cover
-all_data %>% group_by(ZCTA5CE20) %>% arrange(ZCTA5CE20, desc(count)) %>% top_n(1)
-
-# Percent of ZIP for each land cover
-all_data %>% group_by(ZCTA5CE20) %>% mutate(percent = count / sum(count))
+# Build the complete data set
+buffered_freq <- bind_rows(all_data) %>%
+  mutate(count = as.numeric(count)) %>%
+  rename(land_cover = value) %>%
+  arrange(ZCTA5CE20, land_cover)
 ```
 
+## Buffered Output Table {background-color="#A1D6F4"}
+
+```{r Buffered Table}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+datatable(buffered_freq, rownames = FALSE, options = list(pagelength = 8))
+```
+
+## Buffered Predominant Land Cover {background-color="#A1D6F4"}
+
+```{r Buffered Predominant Land Cover}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Predominant land cover
+buffered_predominant <- buffered_freq %>%
+  group_by(ZCTA5CE20) %>%
+  arrange(ZCTA5CE20, desc(count)) %>%
+  top_n(1)
+
+datatable(buffered_predominant, rownames = FALSE, options = list(pagelength = 8))
+```
+
+## Buffered Percent Land Cover {background-color="#A1D6F4"}
+
+```{r Buffered Percent Land Cover}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Percent of ZIP for each land cover
+buffered_percent <- buffered_freq %>%
+  group_by(ZCTA5CE20) %>%
+  mutate(percent = count / sum(count)) %>%
+  arrange(ZCTA5CE20, land_cover)
+
+datatable(buffered_percent, rownames = FALSE, options = list(pagelength = 8)) %>%
+  formatPercentage('percent', digits = 1)
+```

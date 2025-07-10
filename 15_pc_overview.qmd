@@ -83,6 +83,16 @@ ggplot(industry_dwp, aes(x = reorder(Line, Premium), y =  Premium)) +
 
 ```
 
+:::{.notes}
+This breaks out premium by line of business
+
+Personal auto is the biggest at over $350B/year in premium.
+
+Then home, farm, and fire and allied lines. Around $270B/year.
+
+I love slides that have three "Other" Categories, but they're all other in their own way
+
+:::
 
 ## Oh, the Things We'll Insure - P&C Edition - Fun Version {background-color="#A1D6F4"}
 

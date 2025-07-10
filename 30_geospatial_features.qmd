@@ -3,10 +3,10 @@
 ## Potentially predictive features for one or more perils {background-color="#A1D6F4"}
 
 :::{.incremental}
-Data sources and variables found in insurance filings:
+Non-exhaustive list of data sources and variables found in insurance filings:
 
 - Crime
-- Precipitation - U.S. National Weather Service (PRISM)SERFF: FAIG-134593537
+- Precipitation - U.S. National Weather Service (PRISM)
 - Sea Surface Temperature / Sea Ice Coverage (NOAA)
 - North American Land Data Assimilation System (NLDAS)
 - Stream Flow (USGS)
@@ -22,6 +22,9 @@ Data sources and variables found in insurance filings:
 
 Hail event counts of the risk location
 Wind event counts of the risk location 
+PRISM SERFF: FAIG-134593537
+
+We'll focus on the last two two. The others present similar issues
 
 :::
 
@@ -29,7 +32,7 @@ Wind event counts of the risk location
 
 :::{.incremental} 
 
-- Download *by county* from https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
+- Download **by county** from https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx
 - Shapefile with an ID
 - Separate Access database with data. [Documentation](https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo
 )
@@ -51,12 +54,12 @@ SERFF: FAIG-134593537, MUOF-134283674, AMMH-134210246
 
 Shapefile + plain text files
 
-```{r}
+```{r Manhattan SSURGO}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read muaggatt data file
+# Read muaggatt data file for New York County
 muaggatt <- read_delim(
   "data_in/ssurgo/NY061/tabular/muaggatt.txt", delim = "|",
   col_names = muaggatt_names,
@@ -66,10 +69,10 @@ muaggatt <- read_delim(
 ssurgo <- read_sf("data_in/ssurgo/NY061/spatial/soilmu_a_ny061.shp") %>%
   left_join(muaggatt, c ("MUKEY" = "mukey"))
 
-# Define color palate
+# Define color palate - these are always annoying
 aws_pal <- colorBin("Blues", ssurgo$aws050wta, 5, pretty = FALSE)
 
-# Create plot
+# Create available water storage plot plot
 leaflet(ssurgo) %>%
   addPolygons(weight = 0.5,
               opacity = 1.0, fillOpacity = 1.0,
@@ -82,11 +85,13 @@ leaflet(ssurgo) %>%
 
 ```
 
-
+:::{.notes }
+"Available water storage or available water capacity (AWC) refers to the quantity of water that the soil is capable of storing for use by plants. The capacity for water storage is given in centimeters of water per centimeter of soil for each soil layer"
+:::
 
 ## NLCD {background-color="#A1D6F4"}
 
-Raster image
+Giant Raster (pixel) image
 
 ::: columns
 ::: {.column width="40%"}
@@ -105,13 +110,22 @@ nlcd <- raster("data_in/nlcd/Annual_NLCD_LndCov_2023_CU_C1V0.tif")
 # freq(nlcd) <- Count frequency of cells. Takes a long time to render
 plot(nlcd)
 
+# leaflet takes too long for this one
+# leaflet() %>%
+#   addTiles() %>%
+#   addRasterImage(nlcd, opacity = 0.5)
+
 ```
 :::
 :::
 
 ::: {.notes }
+National Land Cover Data set
+
+Depicts the predominant thematic land cover class within the mapping year with respect to broad categories of artificial or natural surface cover
+
 30m x 30m grid
-105000 160000
+105,000 x 160,000
 
 :::
 
@@ -122,10 +136,18 @@ plot(nlcd)
 mgrs_man  <- read_sf("data_in/geo/MGRS_1km_18T_unprojected/MGRS_1km_18T_unprojected.shp") %>%
   st_crop(xmin = -74.05, xmax = -73.90, ymin = 40.65, ymax = 40.90)
 
-#Transform extent
+# Transform extent
 extent_man <- st_transform(mgrs_man, crs(nlcd)) %>% extent()
 nlcd_man <- crop(nlcd, extent_man)
 
 plot(nlcd_man)
+# leaflet() %>%
+#   addTiles() %>%
+#   addRasterImage(nlcd_man, opacity = 0.5)
+
 ```
 
+:::{.notes }
+Manhattan is quite uninteresting - lots of 
+
+::: 

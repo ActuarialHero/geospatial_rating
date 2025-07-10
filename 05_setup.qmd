@@ -6,9 +6,8 @@ library(scales)
 library(readxl)
 library(sf)
 library(leaflet)
-library(kableExtra)
-library(summarytools)
 library(raster)
+library(DT)
 ```
 
 ```{r muaggatt setup}
@@ -59,5 +58,6 @@ muaggatt_types <- c("cclnnnnnccnnnnnccclnnncccccccccccccncnnc")
 bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
 # pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
 
+options(DT.options = list(pageLength = 8))
 ```
 

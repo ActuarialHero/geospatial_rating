@@ -10,7 +10,7 @@
 - ZIP Codes
 - Census Boundaries: Tracts, Census Block Groups, or Census Blocks
 - Grids
-- Newer Geographic Models
+- Newer Geographic Boundaries
 
 ::: {.fragment}
 Note: State laws may impact your boundary choice
@@ -19,19 +19,19 @@ Note: State laws may impact your boundary choice
 :::
 ::: {.notes}
 
-State: Just one territory by state
-Counties: Still pretty big areas. 3,143 counties & equivalents. Rarely used
+State: Just one territory by state. Since regulatory approval is by state, this is the least granular your territory can possibly be
+Counties: Still pretty big areas. 3,143 counties & equivalents. Still have modest usage these days.
 Cities:
 - Need to assign address to city level. Some address standardization assigns addresses to a different city (Woodbury -> St. Paul)
 - Some people don't live in incorporate cities, so need to fill in the rural parts of states
-- Can be tough to find shapefiles of all the boundaries
+- Can be tough to find files of the city boundaries you're confident in
 ZIP Codes
 - 30,000 - 40,000 ZIP codes depending on which ones you count
 - Define postal routes, not boundaries
 - Need a graphical representation of them (ZCTA)
 - Continuously changing
 - https://about.usps.com/postal-bulletin/2009/pb22262/html/updt_002.htm
-- Cross city and state boundaries
+- Cross city, county, and state boundaries
 - People generally know their ZIP code
 Census Boundaries
 - Renumbered every 10 years
@@ -47,6 +47,16 @@ State Laws
 - Grids in some states but city in MN
 :::
 
+## Key R Packages {background-color="#A1D6F4"}
+
+:::{.incrementa}
+- sf - Package for working with simple features. Useful for shapefile data
+  - Replaces rgdal and rgeos
+- raster - For working with raster data
+- leaflet - For plotting shapefiles and rasters on top of a OpenStreetMaps base layer with some interactivity. Much nicer than plot, which we'll also see
+
+We'll also use a host of tidyverse favorites, including dplyr and ggplot2.
+:::
 
 ## Counties {background-color="#A1D6F4"}
 
@@ -55,7 +65,7 @@ State Laws
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read & Filter Census Tract File for New York County
+# Read & Filter Census County Boundary file for New York State using sf package
 ny_counties  <- read_sf("data_in/geo/tl_2024_us_county/tl_2024_us_county.shp") %>%
   filter(STATEFP == "36") # New York FIPS code is 36
 
@@ -66,15 +76,15 @@ leaflet(ny_counties) %>%
 ```
 
 ::: {.notes}
-So there are two fundamental ways of representing geospatial data: raster and vector.
+So there are two fundamental ways of representing geospatial data: raster and shape files/vectors
 
-We'll start with vector. Theyre good for describing boundaries. They can also represent points and lines, but that's not helpful for territory boundaries
+We'll start with vector. They're good for describing boundaries. They can also represent points and lines, but that's not helpful for this use case.
 
 Counties can be pretty big.
 
-From a few in Hawaii to 254 in Texas.
+From a three in Delaware to 254 in Texas.
 
-Radically different sizes
+Radically different sizes. Some of the unorganized territories in Alaska are huge
 
 :::
 
@@ -90,8 +100,7 @@ Radically different sizes
 # Read ZIP Code shapefile for United States
 zip_2024  <- read_sf("data_in/geo/tl_2024_us_zcta520/tl_2024_us_zcta520.shp")
 
-# Filter to New York, NY ZIP codes
-# ...sort of - Marble Hill Chopped off
+# Filter to New York, NY ZIP codes... sort of - Marble Hill Chopped off
 zip_manhattan <- zip_2024 %>%
   filter(ZCTA5CE20 %in% c(as.character(seq(from = 10000, to = 10299))))
 
@@ -141,7 +150,7 @@ Counties are broken into Census tracts
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read & Filter Census Tract File for New York County
+# Read & Filter Census Block Group File for New York County
 new_york_county_bg  <- read_sf("data_in/geo/tl_2024_36_bg/tl_2024_36_bg.shp") %>%
   filter(STATEFP == "36", COUNTYFP == "061")
 
@@ -165,7 +174,7 @@ Census tracts are broken into Census block groups
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read & Filter Census Tract File for New York County
+# Read & Filter Census Block file for New York County
 # Why do STATEFP and COUNTYFP have 20s in them for this data and not the others?
 ny_tabblock20  <- read_sf("data_in/geo/tl_2024_36_tabblock20/tl_2024_36_tabblock20.shp") %>%
   filter(STATEFP20 == "36", COUNTYFP20 == "061") 
@@ -212,7 +221,7 @@ ny_tabblock10 <- read_sf("data_in/geo/tl_2010_36_tabblock10/tl_2010_36_tabblock1
 ny_tabblock20 <- ny_tabblock20 %>%
   mutate(GEOID_NUMERIC = as.numeric(GEOID20)) 
 
-# Create the raster without values
+# Create the raster without values using raster package
 tabblock_raster <- raster(ny_tabblock20, res = 0.0001) # Roughly 8-9M resolution
 
 # Convert the shapefiles to raster
@@ -221,27 +230,34 @@ tabblock_raster20 <- rasterize(ny_tabblock20, tabblock_raster, field = "GEOID_NU
 
 tabblock_compare <- tabblock_raster10 == tabblock_raster20
 
-# Set up color palatte
+# Set up color palette
 tabblock_pal <- colorNumeric(c("#67a9cf", "#ef8a62"), values(tabblock_compare),
                     na.color = "transparent")
 
 leaflet() %>%
   addTiles() %>%
   addRasterImage(tabblock_compare, colors = tabblock_pal, opacity = 0.5)
+```
 
+```{r Census Disruption Table}
 # Summary statistics
-freq(tabblock_compare, useNA = 'no') %>%
+disruption <- freq(tabblock_compare, useNA = 'no') %>%
   as.data.frame() %>%
-  mutate(Fraction = count/sum(count)) %>%
-  kbl(format = "markdown", format.args = list(big.mark = ",")) 
+  mutate(percent = count/sum(count)) 
+
+datatable(disruption, rownames = FALSE, options = list(pagelength = 2)) %>%
+  formatRound('count', digits = 0, mark = ",") %>%
+  formatPercentage('percent', digits = 1)
 ```
 
 ::: {.notes}
-Raster is faster but vector is correcter
+Census blocks change for each decennial census, so you want to be careful to make sure you look up the census block from the correct year. 
 
-Often times just plopping a bunch of rasters together is good enough for what we need for territories, which often smooth out granular features.
+This example compares 2010 vs. 2020 Census blocks to see what area changed census block number in 2020.
 
-Rasters tend to default to using disk space while shapefiles are in memory.
+Often times just plopping a bunch of rasters together is good enough for what we need for territories, which often smooth out granular features. Shapefile overlaps appear to be faster in R now, but they were orders of magnitude slower than comparing rasters in earlier analyses.
+
+Rasters tend to default to using disk space while shapefiles are read into memory. Need to solve different computational issues to process the whole country.
 
 Historically, overlaying two shapefiles for calculations has been monstrously expensive time-wise
 :::
@@ -254,11 +270,17 @@ Historically, overlaying two shapefiles for calculations has been monstrously ex
 #| code-fold: true
 #| code-summary: "Show code"
 
-# Read & Filter Census Tract File for New York County
-# Why do STATEFP and COUNTYFP have 20s in them for this data and not the others?
+# Filter to Manhattan county to crop grid
+manhattan_county <- ny_counties %>% filter(COUNTYFP == "061")
+
+# Read in section of the MGRS and crop to Manhattan
 mgrs  <- read_sf("data_in/geo/MGRS_1km_18T_unprojected/MGRS_1km_18T_unprojected.shp") %>%
   st_crop(xmin = -74.05, xmax = -73.90, ymin = 40.65, ymax = 40.90)
 
+# Need to change the coordinate reference system of one of them to do the intersection
+mgrs <- st_intersection(manhattan_county, st_transform(mgrs, st_crs(manhattan_county)))
+
+# Plot
 leaflet(mgrs) %>%
   addTiles() %>%
   addPolygons(weight = 0.5, opacity = 1.0)
@@ -269,17 +291,36 @@ leaflet(mgrs) %>%
 - Easy to create rasters and assign points
 - Typically don't line up with city, state, county, or ZIP boundaries
 - Territories get narrower the higher up on the globe you are
-
-https://earth-info.nga.mil/index.php?dir=coordsys&action=mgrs-1km-polyline-dloads
-
 :::
+
+## Territory Counts {background-color="#A1D6F4"}
+```{r Count of Manhattan-ish territories}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+manhattan_territory_counts <- data.frame(
+  type = c("ZIP Codes", "Census Tracts", "Block Groups", "Blocks", "MGRS Squares"),
+  count = c(nrow(zip_manhattan), nrow(new_york_county_tracts), nrow(new_york_county_bg), nrow(ny_tabblock20), nrow(mgrs)))
+
+datatable(manhattan_territory_counts, rownames = FALSE) %>%
+  formatRound('count', digits = 0, mark = ",")
+```
+
 
 
 ## Newer Geometries {background-color="#A1D6F4"}
 
-- Spherical: s2 geometry http://s2geometry.io/ https://r-spatial.github.io/s2/
-- Hexagonal: h3 geometry https://h3geo.org/
-- Hexagonal: ALFA-134414286. 2,600 hexagons coverage Alabama. Filed 2025-05-14. Effective 2025-08-24
+- Spherical: s2 geometry
+  - http://s2geometry.io/
+  - https://r-spatial.github.io/s2/
+- Hexagonal: h3 geometry
+  - https://h3geo.org/
+- Hexagonal (not h3):
+  - Alfa Mutual using 2,600 hexagons coverage Alabama.
+  - Filing: ALFA-134414286
+  - Date Filed: 2025-05-14
+  - Date Effective: 2025-08-24
 
 ::: {.notes}
 s2 was used by Tinder

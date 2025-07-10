@@ -19,7 +19,7 @@ Kansas State University Alum
 
 [www.actuarialhero.com](www.actuarialhero.com)
 
-[GitHub](https://github.com/ActuarialHero)
+My unremarkable [GitHub](https://github.com/ActuarialHero)
 :::
 
 :::
@@ -33,7 +33,7 @@ Previously worked at
 - Travelers
 - Crum and Forster, 
 - Solera/Explore Information Services, a Motor Vehicle Record Vendor, and
-- Coherent, a Series B startup
+- Coherent, a Series B start-up
 :::
 
 ## Disclaimers {background-color="#A1D6F4"}
@@ -57,17 +57,19 @@ Before we begin
 ## Arch Insurance is hiring {background-color="#A1D6F4"}
 
 ::: columns
-::: {.column width="40%"}
+::: {.column width="50%"}
+Careers Webpage:
+
 ![](images/arch_insurance_careers_qr_code.png)
 :::
 
-::: {.column width="60%"}
+::: {.column width="50%"}
 
-Website:
+Careers Webpage:
 
 https://archgroup.wd1.myworkdayjobs.com/careers/
 
-Job Categories to this group:
+Job categories most relevant to this group:
 
 - Analytics & BI
 - Information Technology
@@ -78,13 +80,34 @@ Job Categories to this group:
 
 ## Slides {background-color="#A1D6F4"}
 
-Slides are available here (ZIP file in Google Docs):
+::: columns
+::: {.column width="50%"}
+Rendered slides (ZIP file in Google Docs):
 
 ![](images/presentation_qr_code.png)
+:::
 
+::: {.column width="50%"}
+
+Source code:
+
+![](images/presentation_github_qr_code.png)
+
+Note: Doesn't contain data sets, so it won't render without changes
+:::
+:::
+
+::: {.notes}
+I hate when people take photos of every slide during the presentation.
+
+You don't need to take photos of this deck, you can download it here.
+
+I tried pushing this to GitHub pages, but the html file is more than 100 MB, so that broke
+:::
 
 ## Agenda {background-color="#A1D6F4"}
 
+::: {.incremental}
 - Property & Casualty (P&C) Industry Overview
 - U.S. Insurance Regulation
 - Geospatial Data in Homeowners
@@ -95,7 +118,12 @@ Slides are available here (ZIP file in Google Docs):
 - Example Territory Maps
 - Location-specific Data
 - Conclusion
-- Happy Hour
+- Happy Hour (The Malt House)
 
+:::
 
-  
+:::{.notes }
+Motivation: The content mix was inspired by happy hour discussions after previous meetup groups. Some folks with substantial geospatial background didn't realize the insurance industry used geospatial data, so this will skew more toward domain knowledge than heavy-duty R coding, but you could certainly lift these concepts and throw down thousand of lines of R code to build out some cool territory models with the basics here.
+
+We're going to start zoomed at at the entire Property & Casualty industry level, and then zoom into a single part of a homeowners rating plan
+:::

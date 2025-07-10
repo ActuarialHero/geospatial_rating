@@ -6,6 +6,13 @@ library(raster)
 library(terra)
 library(fasterize)
 
+count(st_drop_geometry(c), st_drop_geometry(MGRS))
+
+plot(c)
+
+st_crs(manhattan_county)
+st_crs(mgrs)
+
 ### Internal Points
 
 internal_points <- data.frame(

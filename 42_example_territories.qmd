@@ -33,9 +33,9 @@ Their esurance company in Nevada uses 0.05, 0.1, 0.2, 0.4 grid  SERFF ESUR-12986
 
 :::
 
-## Allstate - Hurricane {background-color="#A1D6F4"}
+## Allstate - Weather Water {background-color="#A1D6F4"}
 
-```{r Allstate NY hurricane factors}
+```{r Allstate NY Weather Water}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
@@ -53,60 +53,6 @@ zip_2024  <- read_sf("data_in/geo/tl_2024_us_zcta520/tl_2024_us_zcta520.shp")
 # Join factors to ZIP shapefile
 zip_allstate_ny <- zip_2024 %>%
   inner_join(allstate_ny, by = c("ZCTA5CE20" = "zip"))
-
-# Set up a color palette
-pal <- colorBin(
-  palette = c("#4575b4", "#91bfdb","#e0f3f8","#ffffbf","#fee090","#fc8d59","#d73027"),
-  domain = zip_allstate_ny$hurricane,
-  bins = c(0, 0.5, 1.5, 2.5, 4.0, 5.0, 6.0, 7.5, 10.0),
-  na.color = "transparent"
-)
-
-# Plot on top of Open Street Maps basemap
-leaflet(zip_allstate_ny) %>%
-  addTiles() %>%
-  addPolygons(
-    fillColor = ~pal(hurricane),
-    color = "white",
-    weight = 1.0,
-    fillOpacity = 0.7) %>%
-  addLegend(pal = pal, values = ~hurricane, title = "Hurricane Factor")
-```
-
-## Allstate - Theft {background-color="#A1D6F4"}
-
-```{r Allstate NY Theft}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show code"
-
-
-# Set up a color palette
-pal <- colorBin(
-  palette = c("#4575b4", "#91bfdb","#e0f3f8","#fee090","#fc8d59","#d73027"),
-  domain = zip_allstate_ny$theft,
-  bins = c(0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.00),
-  na.color = "transparent"
-)
-
-# Plot on top of Open Street Maps basemap
-leaflet(zip_allstate_ny) %>%
-  addTiles() %>%
-  addPolygons(
-    fillColor = ~pal(theft),
-    color = "white",
-    weight = 1.0,
-    fillOpacity = 0.7) %>%
-  addLegend(pal = pal, values = ~theft, title = "Hurricane Factor")
-```
-
-## Allstate - Weather Water {background-color="#A1D6F4"}
-
-```{r Allstate NY Weather Water}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show code"
-
 
 # Set up a color palette
 pal <- colorBin(
@@ -154,6 +100,59 @@ leaflet(zip_allstate_ny) %>%
   addLegend(pal = pal, values = ~wind, title = "Wind")
 ```
 
+## Allstate - Theft {background-color="#A1D6F4"}
+
+```{r Allstate NY Theft}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+
+# Set up a color palette
+pal <- colorBin(
+  palette = c("#4575b4", "#91bfdb","#e0f3f8","#fee090","#fc8d59","#d73027"),
+  domain = zip_allstate_ny$theft,
+  bins = c(0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.00),
+  na.color = "transparent"
+)
+
+# Plot on top of Open Street Maps basemap
+leaflet(zip_allstate_ny) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~pal(theft),
+    color = "white",
+    weight = 1.0,
+    fillOpacity = 0.7) %>%
+  addLegend(pal = pal, values = ~theft, title = "Hurricane Factor")
+```
+
+
+## Allstate - Hurricane {background-color="#A1D6F4"}
+
+```{r Allstate NY hurricane factors}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+# Set up a color palette
+pal <- colorBin(
+  palette = c("#4575b4", "#91bfdb","#e0f3f8","#ffffbf","#fee090","#fc8d59","#d73027"),
+  domain = zip_allstate_ny$hurricane,
+  bins = c(0, 0.5, 1.5, 2.5, 4.0, 5.0, 6.0, 7.5, 10.0),
+  na.color = "transparent"
+)
+
+# Plot on top of Open Street Maps basemap
+leaflet(zip_allstate_ny) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~pal(hurricane),
+    color = "white",
+    weight = 1.0,
+    fillOpacity = 0.7) %>%
+  addLegend(pal = pal, values = ~hurricane, title = "Hurricane Factor")
+```
 
 
 ## State Farm Group (176) {background-color="#A1D6F4"}
@@ -169,18 +168,16 @@ Ranked #1 in NY ($1.2B in 2024 Direct Written Premium)
 - 2 Perils:
     - Hurricane 
     - Non-Hurricane
-Source: 4,637 PDF pages of data
+- Source: 4,637 PDF pages of data
 
 ::: {.notes}
 Extracted using Tabula
 Excel get data from PDF also works well
 :::
 
-## State Farm Fire And Casualty Company (25143) - Hurricane Factors {background-color="#A1D6F4"}
+## State Farm Fire And Casualty Company (25143) - Non-Hurricane Factors {background-color="#A1D6F4"}
 
-Hurricane Factors
-
-```{r State Farm NY hurricane factors}
+```{r New York State}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show code"
@@ -190,30 +187,6 @@ sf_ny <- read_csv("./references_private/StateFarmNY_20200715.csv", col_names = c
   mutate( # This parses the coordinate out of GRID_ID
     y =   0.01 * as.numeric(substr(GRID_ID, 1, 5)),
     x = - 0.01 * as.numeric(substr(GRID_ID, 6, 10)))
-
-# Turn it into a raster
-hurr_ny <- rasterFromXYZ(sf_ny[, c("x", "y", "HURR_FCTR")], crs = crs('+proj=longlat +datum=WGS84'))
-
-# Set up a color palette
-pal <- colorBin(
-  palette = c("#2c7bb6", "#abd9e9","#ffffbf","#fdae61","#d7191c"),
-  domain = values(hurr_ny),
-  bins = c(0, 0.5, 1.5, 2.0, 2.5, 3.0),
-  na.color = "transparent"
-)
-
-leaflet() %>%
-  addTiles() %>%
-  addRasterImage(hurr_ny, colors = pal, opacity = 0.5) %>%
-  addLegend(pal = pal, values = values(hurr_ny), title = "Hurricane Factor")
-```
-
-## State Farm Fire And Casualty Company (25143) - Non-Hurricane Factors {background-color="#A1D6F4"}
-
-```{r New York State}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show code"
 
 # Turn it into a raster
 nonhurr_ny <- rasterFromXYZ(sf_ny[, c("x", "y", "NONHURR_FCTR")], crs = crs('+proj=longlat +datum=WGS84'))
@@ -232,6 +205,30 @@ pal <- colorBin(
 leaflet() %>%
   addTiles() %>%
   addRasterImage(nonhurr_ny, colors = pal, opacity = 0.5) %>%
-  addLegend(pal = pal, values = values(nonhurr_ny), title = "Non-hHurricane Factor")
+  addLegend(pal = pal, values = values(nonhurr_ny), title = "Non-Hurricane Factor")
 ```
 
+## State Farm Fire And Casualty Company (25143) - Hurricane Factors {background-color="#A1D6F4"}
+
+```{r State Farm NY hurricane factors}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+
+
+# Turn it into a raster
+hurr_ny <- rasterFromXYZ(sf_ny[, c("x", "y", "HURR_FCTR")], crs = crs('+proj=longlat +datum=WGS84'))
+
+# Set up a color palette
+pal <- colorBin(
+  palette = c("#2c7bb6", "#abd9e9","#ffffbf","#fdae61","#d7191c"),
+  domain = values(hurr_ny),
+  bins = c(0, 0.5, 1.5, 2.0, 2.5, 3.0),
+  na.color = "transparent"
+)
+
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(hurr_ny, colors = pal, opacity = 0.5) %>%
+  addLegend(pal = pal, values = values(hurr_ny), title = "Hurricane Factor")
+```
